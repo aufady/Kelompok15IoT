@@ -190,31 +190,8 @@ Data telemetry akan muncul:
 ---
 
 ### Diagram Sistem
-┌──────────────────────────────┐
-│         SENSOR DHT22         │
-│ Baca suhu & kelembapan       │
-└───────────────┬──────────────┘
-                │
-                ▼
-┌──────────────────────────────┐
-│        ESP32-S3 (Rust)       │
-│ - Olah data sensor           │
-│ - Kirim MQTT ke ThingsBoard  │
-│ - Terima perintah OTA        │
-└───────────────┬──────────────┘
-                │
-                ▼
-┌──────────────────────────────┐
-│     THINGSBOARD CLOUD        │
-│ - Simpan & tampilkan data    │
-│ - Kirim RPC OTA              │
-└───────────────┬──────────────┘
-                │
-                ▼
-┌──────────────────────────────┐
-│       OTA SERVER (HTTP)      │
-│ Simpan file dev.bin          │
-└──────────────────────────────┘
+
+![Gambar](flowchart.jpeg)  
 
 ---
 ### Penjelasan Hasil Pengujian
@@ -244,4 +221,35 @@ Sistem ESP32-S3 + DHT22 berbasis Rust Embedded mampu:
 
 ---
 ### Hasil Dokumentasi
+![Gambar 1](flowchart.jpeg)  
+*Alur kerja perangkat lunak pada sistem IoT berbasis ESP32-S3*
 
+![Gambar 2](dashboard.png)  
+*Rancangan Tampilan Dashboard Monitoring pada ThingsBoard Cloud*
+
+![Gambar 3](perintahgnuplot.jpeg)  
+*Perintah Gnuplot untuk Visualisasi Data Sensor*
+
+![Gambar 4](perintahlatensi.jpeg)  
+*Perintah Gnuplot untuk Grafik Latensi*
+
+![Gambar 5](DokumentasiESP32-S3peg)  
+*ESP32-S3 terhubung dengan adaptor dan sensor DHT2*
+
+![Gambar 6](TampilanKonektivitas.jpeg)  
+*Tampilan konektivitas di terminal Ubuntu *
+
+![Gambar 7](TampilanDashboardThingsboard.png)  
+*Dashboard ThingsBoard Cloud menampilkan grafik suhu dan kelembapan *
+
+![Gambar 8](otasukses.PNG)  
+*Tampilan log terminal waktu OTA sukses *
+
+![Gambar 9](parameterOTA.png)  
+*Tampilan parameter OTA pada ThingsBoard Cloud *
+
+![Gambar 10](GrafiksensorGnuplot.jpeg)  
+*Grafik Temperature and Humidity vs Time menggunakan Gnuplot *
+
+![Gambar 11](GrafikLatensiGnuplot.jpeg)  
+*Grafik Latency Analysis Sensor RTC vs ThingsBoard *

@@ -40,7 +40,6 @@ Teknik Instrumentasi - Institut Teknologi Sepuluh Nopember Surabaya
 ### 💻 Perangkat Lunak
 - **Rust (toolchain nightly)**
 - **esp-idf** & **esp-flash**
-- **Python (untuk OTA server)**
 - **ThingsBoard Cloud Account**
 - **Gnuplot** untuk analisis grafik latency
 

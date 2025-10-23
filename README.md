@@ -59,10 +59,10 @@ cargo install espup
 espup install
 
 ### 3️⃣ Build dan Flash Firmware
-cargo espflash /dev/ttyUSB0 --release
+cargo 
 
-### 4️⃣ Jalankan Server OTA
-
+### 4️⃣ Flash Firmware dan Jalankan Server OTA
+espflash flash --partition-table partition_table.csv target/xtensa-esp32s3-espidf/debug/dev --monitor --port /dev/ttyACM0
 Ketika firmware dikirim, pe akan menampilkan:
 Menerima firmware baru...
 OTA selesai, restart...

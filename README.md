@@ -33,7 +33,7 @@ Teknik Instrumentasi - Institut Teknologi Sepuluh Nopember Surabaya
 ### 💡 Perangkat Keras
 - Mikrokontroler **ESP32-S3**
 - Sensor **DHT22 (AM2302)**
-- Breadboard & kabel jumper
+- kabel jumper
 - **Adaptor 5V / charger HP** sebagai sumber daya
 - Komputer dengan koneksi Wi-Fi
 

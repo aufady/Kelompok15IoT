@@ -101,7 +101,7 @@ Berikut tahapan lengkap pengujian sistem **ESP32-S3 dengan sensor DHT22 dan meka
 
 ---
 
-### 🧱 1️⃣ Persiapan Awal
+### 1️⃣ Persiapan Awal
 
 1. Pastikan perangkat keras tersusun dengan benar:
    - VCC DHT22 → 3.3V ESP32-S3  
@@ -113,9 +113,8 @@ Berikut tahapan lengkap pengujian sistem **ESP32-S3 dengan sensor DHT22 dan meka
 
 ---
 
-### ⚙️ 2️⃣ Setup Environment Rust & ESP-IDF di Ubuntu
+### 2️⃣ Setup Environment Rust & ESP-IDF di Ubuntu
 
-```bash
 sudo apt update && sudo apt install build-essential git curl pkg-config libudev-dev -y
 curl https://sh.rustup.rs -sSf | sh
 source $HOME/.cargo/env
@@ -127,60 +126,122 @@ source ~/export-esp.sh
 
 ---
 
-🦀 3️⃣ Kloning dan Build Proyek Rust
+### 3️⃣ Kloning dan Build Proyek Rust
 
 git clone https://github.com/aufady/esp32s3-rust-dht22-ota.git
 cd esp32s3-rust-dht22-ota
 cargo build --release
 
+---
 
-
-
-## 🔄 Langkah Penggunaan
-
-### 1️⃣ Clone Repository
-```bash
-git clone https://github.com/aufady/esp32-rust-ota-thingsboard
-cd esp32-rust-ota-thingsboard
-
-### 2️⃣ Siapkan Toolchain
-rustup target add xtensa-esp32s3-none-elf
-cargo install espflash
-cargo install espup
-espup install
-
-### 3️⃣ Build 
-cargo build
-
-### 4️⃣ Flash Firmware dan Jalankan Server OTA
+### 4️⃣ Flash Firmware ke ESP32-S3
 espflash flash --partition-table partition_table.csv target/xtensa-esp32s3-espidf/debug/dev --monitor --port /dev/ttyACM0
-Ketika firmware dikirim, pe akan menampilkan:
-Menerima firmware baru...
-OTA selesai, restart...
 
-### 5️⃣ Monitoring di ThingsBoard
-Buka dashboard di ThingsBoard Cloud.
-Lihat perubahan nilai suhu dan kelembapan secara real-time.
+---
 
-### 🗂️ Struktur Proyek
-esp32-rust-ota-thingsboard/
-├── src/
-│   ├── main.rs              # Program utama Rust bare-metal
-│   ├── dht22.rs             # Modul pembacaan sensor DHT22
-│   ├── mqtt.rs              # Modul koneksi dan publish MQTT
-│   ├── ota.rs               # Modul OTA update
-│   └── utils.rs             # Fungsi logging dan helper
-├── ota_server.py            # Server HTTP untuk OTA update
-├── Cargo.toml               # Konfigurasi dependensi Rust
-├── README.md                # Dokumentasi proyek
-└── results/
-    ├── data-log.csv         # Hasil pengujian sensor
-    ├── latency.gnuplot      # Script visualisasi latency
-    └── grafik-latency.png   # Grafik hasil Gnuplot
+### 5️⃣ Koneksi MQTT ke ThingsBoard
+1. Masukkan token ThingsBoard ke dalam kode:
+let token = "YOUR_ACCESS_TOKEN";
 
-### 📊 Hasil Pengujian
-Suhu rata-rata: 29–31 °C
-Kelembapan rata-rata: 70–74 %
-Latency rata-rata: 180 ms
-Keberhasilan OTA: 100 % (berhasil)
+2. Jalankan board dan buka dashboard.
+Data telemetry akan muncul:
+{
+  "temperature": 29.3,
+  "humidity": 71.2
+}
+
+---
+
+### 6️⃣ Pengujian OTA Update
+
+1. Build firmware baru:
+
+   cargo build --release
+   espflash save-image --chip esp32s3 target/xtensa-esp32s3-espidf/release/dev dev.bin
+
+2. Upload dev.bin ke server lokal:
+
+   python3 -m http.server 8000
+
+3. Kirim perintah OTA via ThingsBoard RPC:
+
+
+    "method": "ota_update",
+    "params": {
+      "url": "http://<IP_KOMPUTER>:8000/dev.bin"
+    }
+  }
+
+4. Lihat log serial:
+
+       Menerima firmware baru...
+
+       OTA selesai, restart...
+
+---
+
+### 7️⃣ Analisis Kestabilan Transmisi Data
+1. Ekspor data dari ThingsBoard ke CSV.
+
+2. Jalankan Gnuplot:
+
+   gnuplot latency.gnuplot
+
+---
+
+### Diagram Sistem
+┌──────────────────────────────┐
+│         SENSOR DHT22         │
+│ Baca suhu & kelembapan       │
+└───────────────┬──────────────┘
+                │
+                ▼
+┌──────────────────────────────┐
+│        ESP32-S3 (Rust)       │
+│ - Olah data sensor           │
+│ - Kirim MQTT ke ThingsBoard  │
+│ - Terima perintah OTA        │
+└───────────────┬──────────────┘
+                │
+                ▼
+┌──────────────────────────────┐
+│     THINGSBOARD CLOUD        │
+│ - Simpan & tampilkan data    │
+│ - Kirim RPC OTA              │
+└───────────────┬──────────────┘
+                │
+                ▼
+┌──────────────────────────────┐
+│       OTA SERVER (HTTP)      │
+│ Simpan file dev.bin          │
+└──────────────────────────────┘
+
+---
+### Penjelasan Hasil Pengujian
+| Parameter       | Nilai Rata-Rata | Keterangan                             |
+| --------------- | --------------- | -------------------------------------- |
+| 🌡️ Suhu        | 29.4 °C         | Stabil di ruang normal                 |
+| 💧 Kelembapan   | 68 %            | Konsisten selama pengujian             |
+| ⏱️ Latency MQTT | 0.18 detik      | Rata-rata delay antar-pengiriman       |
+| 🔁 OTA Update   | 100 % sukses    | Firmware berhasil diunduh & dijalankan |
+
+---
+### Analisis Kinerja
+- Transmisi data berjalan stabil tanpa kehilangan paket.
+
+- Koneksi Wi-Fi mampu auto-reconnect tanpa gangguan.
+
+- Mekanisme OTA berhasil memperbarui firmware secara aman.
+
+- Rust memberikan performa stabil dan efisien di lingkungan embedded.
+
+---
+### Kesimpulan
+Sistem ESP32-S3 + DHT22 berbasis Rust Embedded mampu:
+- Mengirimkan data sensor ke ThingsBoard secara real-time dan stabil.
+- Melakukan pembaruan OTA otomatis tanpa kabel.
+- Menunjukkan efisiensi tinggi dan keamanan memori khas bahasa Rust.
+
+---
+### Hasil Dokumentasi
 

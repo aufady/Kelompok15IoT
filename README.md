@@ -58,8 +58,8 @@ cargo install espflash
 cargo install espup
 espup install
 
-### 3️⃣ Build dan Flash Firmware
-cargo 
+### 3️⃣ Build 
+cargo build
 
 ### 4️⃣ Flash Firmware dan Jalankan Server OTA
 espflash flash --partition-table partition_table.csv target/xtensa-esp32s3-espidf/debug/dev --monitor --port /dev/ttyACM0

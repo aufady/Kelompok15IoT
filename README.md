@@ -221,8 +221,6 @@ Sistem ESP32-S3 + DHT22 berbasis Rust Embedded mampu:
 
 ---
 ### Hasil Dokumentasi
-![Gambar 1](flowchart.jpeg)  
-*Alur kerja perangkat lunak pada sistem IoT berbasis ESP32-S3*
 
 ![Gambar 2](dashboard.png)  
 *Rancangan Tampilan Dashboard Monitoring pada ThingsBoard Cloud*

@@ -1,3 +1,4 @@
+
 \documentclass[a4paper,12pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -42,7 +43,7 @@
     \vspace{1.5cm}
     \begin{singlespace}
 \centering
-\textquotedblleft Pengujian Kestabilan Transmisi Data Sensor DHT22 dan Mekanisme Pembaruan \textit{OTA} pada Platform
+\textquotedblleft Pengujian Kestabilan Transmisi Data Sensor DHT22 dan Mekanisme Pembaruan \textit{Firmware} \textit{OTA} pada Platform
 \textit{ThingsBoard} Menggunakan \textit{ESP32-S3}\textquotedblright \\
 \end{singlespace}
 
@@ -126,22 +127,22 @@ DAFTAR ISI \dotfill i \\[3pt]
 \thispagestyle{plain}
 
 \subsub{3.4.1 Perancangan Program Utama (main.rs)}{15}
-\subsub{3.4.2 Konfigurasi Build dan Dependensi (Cargo.toml)}{31}
-\subsub{3.4.3 Rancangan Tampilan \textit{Dashboard ThingsBoard}}{33}
-\subsub{3.4.4 Perintah \textit{Gnuplot} untuk Visualisasi Data Sensor dan Analisis Latensi}{34}
+\subsub{3.4.2 Konfigurasi Build dan Dependensi (Cargo.toml)}{16}
+\subsub{3.4.3 Rancangan Tampilan \textit{Dashboard ThingsBoard}}{17}
+\subsub{3.4.4 Perintah \textit{Gnuplot} untuk Visualisasi Data Sensor dan Analisis Latensi}{18}
 
 \vspace{4pt}
-\bab{BAB IV ANALISIS DAN HASIL PEMBAHASAN}{36}
-\subbab{4.1 Hasil Implementasi Sistem}{36}
-\subbab{4.2 Hasil Pengujian Pengiriman Data Sensor}{37}
-\subbab{4.3 Hasil Pengujian \textit{OTA Firmware Update}}{38}
-\subbab{4.4 Analisis \textit{Latency} dan Visualisasi Data Sensor Menggunakan \textit{Gnuplot}}{40}
+\bab{BAB IV ANALISIS DAN HASIL PEMBAHASAN}{20}
+\subbab{4.1 Hasil Implementasi Sistem}{20}
+\subbab{4.2 Hasil Pengujian Pengiriman Data Sensor}{21}
+\subbab{4.3 Hasil Pengujian \textit{OTA Firmware Update}}{22}
+\subbab{4.4 Analisis \textit{Latency} dan Visualisasi Data Sensor Menggunakan \textit{Gnuplot}}{24}
 
 \vspace{4pt}
-\bab{BAB V KESIMPULAN DAN SARAN}{42}
-\bab{DAFTAR PUSTAKA}{44}
-\bab{LAMPIRAN}{48}
-\bab{BIODATA PENULIS}{51}
+\bab{BAB V KESIMPULAN DAN SARAN}{26}
+\bab{DAFTAR PUSTAKA}{28}
+\bab{LAMPIRAN}{32}
+\bab{BIODATA PENULIS}{52}
 
 \newpage
 \thispagestyle{plain}
@@ -154,15 +155,16 @@ DAFTAR ISI \dotfill i \\[3pt]
 Gambar 3.1 Desain Sistem dan Arsitektur \dotfill 12 \\
 Gambar 3.2 \textit{Wiring} antara \textit{ESP32-S3} dan \textit{DHT22} \dotfill 13 \\
 Gambar 3.3 Alur kerja perangkat lunak pada sistem IoT berbasis \textit{ESP32-S3} \dotfill 14 \\
-Gambar 3.4.3 Rancangan Tampilan \textit{Dashboard ThingsBoard} \dotfill 33 \\
-Gambar 3.4.4 Perintah \textit{Gnuplot} untuk Visualisasi Data Sensor \dotfill 34 \\
-Gambar 3.4.4.1 Perintah \textit{Gnuplot} untuk Grafik Latensi \dotfill 35 \\
-Gambar 4.1.1 \textit{ESP32-S3} terhubung dengan adaptor dan sensor \textit{DHT22} \dotfill 36 \\
-Gambar 4.2 \textit{Dashboard ThingsBoard Cloud} menampilkan grafik suhu dan kelembapan \dotfill 37 \\
-Gambar 4.3 Tampilan log terminal waktu OTA sukses \dotfill 38 \\
-Gambar 4.3.1 Tampilan parameter \textit{OTA} pada \textit{ThingsBoard Cloud} \dotfill 39 \\
-Gambar 4.4 Grafik \textit{Temperature and Humidity vs Time} menggunakan \textit{Gnuplot} \dotfill 40 \\
-Gambar 4.4.1 Grafik \textit{Latency Analysis} Sensor \textit{RTC} vs \textit{ThingsBoard} \dotfill 40 \\
+Gambar 3.4.3 Rancangan Tampilan \textit{Dashboard ThingsBoard} \dotfill 17 \\
+Gambar 3.4.4 Perintah \textit{Gnuplot} untuk Visualisasi Data Sensor \dotfill 18 \\
+Gambar 3.4.4.1 Perintah \textit{Gnuplot} untuk Grafik Latensi \dotfill 19 \\
+Gambar 4.1 \textit{ESP32-S3} terhubung dengan adaptor dan sensor \textit{DHT22} \dotfill 20 \\
+Gambar 4.1.1 Tampilan konektivitas di terminal \textit{Ubuntu} \dotfill 20 \\
+Gambar 4.2 \textit{Dashboard ThingsBoard Cloud} menampilkan grafik suhu dan kelembapan \dotfill 21 \\
+Gambar 4.3 Tampilan log terminal waktu OTA sukses \dotfill 22 \\
+Gambar 4.3.1 Tampilan parameter \textit{OTA} pada \textit{ThingsBoard Cloud} \dotfill 23 \\
+Gambar 4.4 Grafik \textit{Temperature and Humidity vs Time} menggunakan \textit{Gnuplot} \dotfill 24 \\
+Gambar 4.4.1 Grafik \textit{Latency Analysis} Sensor \textit{RTC} vs \textit{ThingsBoard} \dotfill 24 \\
 
 \newpage
 \thispagestyle{plain}
@@ -702,8 +704,660 @@ Sementara itu, file \texttt{cargo\_OTA} digunakan untuk mendukung proses \textit
 \noindent\textbf{3.4.1 Perancangan Program Utama (\texttt{main.rs})}
 
 \begin{}
+    
+Program utama dikembangkan menggunakan bahasa pemrograman \textit{Rust} dengan pendekatan \textit{bare-metal} (\texttt{\#\![no\_std]}), sehingga dapat berjalan langsung pada mikrokontroler \textit{ESP32-S3} tanpa sistem operasi tambahan. Pendekatan ini membuat sistem lebih ringan dan efisien dalam penggunaan memori. Pada tahap awal, dilakukan inisialisasi perangkat keras seperti \texttt{GPIO}, \textit{driver delay}, serta konfigurasi \textit{Wi-Fi} menggunakan pustaka \textit{EspWifi}. Setelah perangkat berhasil terhubung ke jaringan, sistem melakukan sinkronisasi waktu melalui \textit{NTP} (\textit{Network Time Protocol}) agar waktu pengiriman data sesuai dengan waktu aktual.
 
-    \begin{tabular}{|p{\textwidth}|}
+Selanjutnya, sistem menginisialisasi koneksi ke broker \textit{MQTT} milik \textit{ThingsBoard Cloud} menggunakan token autentikasi perangkat. Setelah koneksi berhasil, perangkat mulai membaca nilai suhu dan kelembapan dari sensor DHT22 yang terhubung ke pin GPIO4. Data hasil pembacaan sensor dikirim ke \textit{ThingsBoard} dalam format JSON dengan parameter:
+\begin{itemize}
+    \item \texttt{send\_time}: waktu lokal perangkat saat data dikirim,
+    \item \texttt{ts}: timestamp dari sistem dalam milidetik,
+    \item \texttt{temperature}: nilai suhu dalam ${}^\circ\text{C}$,
+    \item \texttt{humidity}: nilai kelembapan dalam $\%$.
+\end{itemize}
+
+\textit{Payload} data dikirim ke topik \texttt{v1/devices/me/telemetry} setiap 60 detik. Proses ini menghasilkan pesan di terminal seperti ``data terkirim'', yang menandakan bahwa proses pengiriman data telah berhasil.
+
+Selain itu, perangkat juga dilengkapi dengan fitur \textit{Over-The-Air (OTA) \textit{Firmware Update}}, yang memungkinkan pembaruan \textit{firmware} dilakukan langsung melalui \textit{ThingsBoard} tanpa kabel. Ketika pembaruan tersedia, sistem akan menerima perintah dari \textit{server}, mengunduh \textit{firmware} baru, menulisnya ke memori \textit{flash}, dan menampilkan pesan ``\texttt{OTA selesai, restart...}'' sebelum melakukan \textit{restart} otomatis untuk memuat \textit{firmware} versi terbaru.
+
+Dengan penerapan program ini, sistem terbukti mampu melakukan pembacaan sensor, pengiriman data, serta pembaruan \textit{firmware} secara otomatis melalui jaringan. Dokumentasi kode program main.rs secara menyeluruh terdapat dilampiran pada bagian akhir laporan ini.
+
+\noindent\textbf{3.4.2 Konfigurasi Build dan Depensi(\texttt{Cargo.toml})}
+
+Bagian ini berisi pengaturan utama proyek \textit{Rust} yang digunakan untuk membangun sistem di mikrokontroler \textit{ESP32-S3}. File \texttt{Cargo.toml} mengatur identitas proyek, versi, serta pustaka-pustaka ({dependensi}) yang dibutuhkan agar program bisa dijalankan dengan baik.
+
+Pada bagian \texttt{[package]}, ditulis nama proyek \texttt{streamdht}, versi program, nama penulis, serta edisi Rust yang dipakai. Baris \texttt{harness = false} digunakan supaya Cargo tidak menjalankan mode pengujian otomatis, karena program ini langsung dijalankan di mikrokontroler, bukan di komputer biasa.
+
+Bagian \texttt{[profile]} mengatur mode kompilasi. Mode \texttt{release} menggunakan optimasi agar ukuran file hasil \textit{build} lebih kecil, sedangkan mode \texttt{dev} digunakan saat pengujian agar lebih mudah melihat log atau error. Kemudian di bagian \texttt{[dependencies]}, terdapat beberapa pustaka penting seperti:
+\begin{itemize}
+    \item \texttt{esp-idf-svc} untuk koneksi Wi-Fi, MQTT, dan pengelolaan sistem.
+    \item \texttt{dht-sensor} untuk membaca data suhu dan kelembapan dari sensor DHT22.
+    \item \texttt{serde\_json} untuk membentuk data JSON sebelum dikirim ke ThingsBoard.
+    \item \texttt{chrono} untuk mengatur waktu dan \textit{timestamp}.
+    \item \texttt{anyhow} dan \texttt{log} untuk membantu proses \textit{debug} dan pencatatan \textit{log} program.
+\end{itemize}
+
+Selain itu, ada juga \texttt{embuild} di bagian \texttt{[build-dependencies]} yang membantu proses kompilasi otomatis ke dalam format yang bisa dijalankan di \textit {ESP32}. Secara keseluruhan, file \texttt{Cargo.toml} ini berfungsi untuk memastikan semua pustaka dan pengaturan yang dibutuhkan sudah lengkap, sehingga proses \textit{build} berjalan lancar dan program bisa dikompilasi ke perangkat tanpa \textit{error}. Dokumentasi kode program main.rs secara menyeluruh terdapat dilampiran pada bagian akhir laporan ini.
+
+\vspace{0.3cm}
+
+\noindent\textbf{3.4.3 Rancangan Tampilan \textit {Dashboard ThingsBoard}}
+\addcontentsline{toc}{subsection}{3.4.3 Rancangan Tampilan Dashboard ThingsBoard}
+\vspace{0.1cm} % Spasi tipis
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.8\textwidth sesuai permintaan
+    \includegraphics[width=0.8\textwidth]{dashboard.png}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Gambar 3.4.3 } Rancangan tampilan {\textit{Dashboard Monitoring} pada \textit{Thingsboard}
+  
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+Bagian ini menampilkan rancangan \textit{dashboard} ThingsBoard Cloud yang digunakan untuk memantau data hasil pembacaan sensor DHT22 secara \textit{real-time}. \textit{Dashboard} ini dibuat untuk memudahkan pengguna dalam mengamati perubahan nilai suhu dan kelembapan yang dikirim oleh perangkat ESP32-S3 setiap 60 detik.
+
+Tampilan \textit{dashboard} terdiri dari dua komponen utama, yaitu \textit{grafik time series} dan \textit{tabel data telemetry}. Grafik \textit{time series} digunakan untuk memperlihatkan tren perubahan suhu dan kelembapan terhadap waktu dalam bentuk garis berwarna, di mana garis biru menunjukkan suhu (\textit{temperature}) dan garis hijau menunjukkan kelembapan (\textit{humidity}). Sementara itu, tabel di sisi kanan berisi data lengkap seperti \textit{timestamp}, \textit{temperature}, \textit{humidity}, s\texttt send\_time, dan \texttt{fw\_state} yang dikirim melalui protokol \textit{MQTT} ke server \textit{ThingsBoard}.
+
+Dari tampilan tersebut, pengguna dapat melihat data sensor secara langsung tanpa harus mengakses perangkat fisik. Informasi yang dikirim dalam format JSON ini memungkinkan proses \textit{monitoring} berjalan otomatis, sehingga sistem menjadi lebih efisien dan mudah dikembangkan untuk kebutuhan \textit{IoT} berbasis \textit{Cloud}.
+
+\vspace{0.3cm}
+
+\noindent\textbf{3.4.4 Perintah Gnuplot untuk Visualisasi Data Sensor dan Analisis Latensi}
+\addcontentsline{toc}{subsection}{3.4.4 Perintah Gnuplot untuk Visualisasi Data Sensor dan Analisis Latensi}
+\vspace{0.1cm} % Spasi tipis
+
+Pada tahap ini dilakukan proses visualisasi data menggunakan \textit{Gnuplot} yang dijalankan melalui terminal \textit{Ubuntu}. Gnuplot digunakan untuk menampilkan grafik hasil pembacaan suhu (\textit{temperature}) dan kelembapan (\textit{humidity}) yang dikirim dari sensor ke platform \textit{ThingsBoard}, serta untuk menganalisis latensi pengiriman data antara sensor dan server.
+
+Langkah awal yang dilakukan yaitu membuka terminal, lalu menjalankan Gnuplot dengan mengetikkan perintah \texttt{gnuplot}. Setelah itu, sistem dikonfigurasi agar dapat membaca file data CSV hasil pengukuran sensor dengan memisahkan nilai-nilai menggunakan tanda ``\texttt{,}''. Berikut adalah contoh perintah yang digunakan untuk menampilkan grafik suhu dan kelembapan:
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.6\textwidth sesuai permintaan
+    \includegraphics[width=0.6\textwidth]{perintahdatasensor.jpeg}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Gambar 3.4.4 } Perintah {\textit{Gnuplot} untuk Visualisasi Data Sensor 
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+Perintah di atas digunakan untuk menampilkan grafik dengan dua sumbu Y. Hasil grafik menunjukkan perubahan nilai suhu dan kelembapan dari waktu ke waktu berdasarkan data yang diterima oleh ThingsBoard.
+
+Selain itu, dilakukan juga analisis latensi untuk mengetahui jeda waktu antara pembacaan data di sensor dan penerimaan data di server. Proses ini juga dijalankan melalui terminal dengan \texttt{Gnuplot} menggunakan file \texttt{latency\_ready.csv}. Berikut perintahnya:
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\justifying
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.6\textwidth sesuai permintaan
+    \includegraphics[width=0.6\textwidth]{perintahlatensi.jpeg}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Gambar 3.4.4.1} Perintah {\textit{Gnuplot} untuk Grafik Latensi
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+Dari hasil grafik latensi yang dihasilkan, dapat diamati variasi waktu tunda (\textit{delay}) dalam satuan detik antara sensor dan server \textit{ThingsBoard}. Nilai latensi yang relatif kecil dan stabil menunjukkan bahwa proses komunikasi data berjalan dengan baik tanpa adanya gangguan jaringan yang berarti.
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\begin{center}
+\textbf{BAB IV ANALISIS DAN HASIL PEMBAHASAN}
+\end{center}
+\vspace{0.3cm}
+
+\noindent\textbf{4.1 Hasil Implementasi Sistem}
+\vspace{0.1cm} % Spasi tipis di bawah judul utama
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.3\textwidth sesuai permintaan
+    \includegraphics[width=0.3\textwidth]{esp.jpeg}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Gambar 4.1} {\textit{ESPS3-32} terhubung dengan adaptor dan sensor \textit {DHT22}}
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.6\textwidth sesuai permintaan
+    \includegraphics[width=0.6\textwidth]{konek.jpeg}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Gambar 4.1.1} {Tampilan konektivitas di terminal \textit {Ubuntu}}
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\justifying
+Implementasi sistem dilakukan dengan merangkai \textit{ESP32-S3}, \textit{sensor DHT22}, serta komponen pendukung seperti kabel \textit{jumper}, dan adaptor 5V sebagai sumber daya utama. Mikrokontroler dihubungkan ke \textit{laptop} menggunakan kabel USB untuk proses pemrograman \textit{firmware} berbasis \textit{Rust}.
+
+Proses implementasi dimulai dengan \textit{build} proyek menggunakan perintah \textit{cargo build}, kemudian dilakukan \textit{upload} program melalui \texitt{cargo flash} agar \textit{firmware} dapat dijalankan langsung pada mikrokontroler. Setelah proses \textit{flashing} berhasil, sistem menampilkan \textit{log}:
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\justifying
+
+eksekusi di terminal Ubuntu. Dari hasil pengujian, terminal menampilkan beberapa status penting seperti:
+\begin{itemize}
+    \item ``\textit{Connected to Wi-Fi}'' $\to$ menunjukkan bahwa perangkat berhasil tersambung ke jaringan.
+    \item ``\textit{MQTT broker connected}'' $\to$ sistem telah terhubung dengan server \textit{ThingsBoard} melalui protokol \textit{MQTT}.
+    \item ``\texttt{Data terkirim (humidity, temperature)}'' $\to$ menandakan data sensor telah berhasil dipublikasikan ke \textit{Cloud}.
+    \item ``{Selain itu, hasil implementasi menunjukkan bahwa perangkat juga mampu 
+melakukan pembaruan firmware melalui mekanisme \textit {OTA (Over-The-Air)}.
+\end{itemize}
+
+Secara keseluruhan, hasil implementasi menunjukkan bahwa proses komunikasi dan pembacaan sistem berjalan stabil tanpa adanya \textit{error} pada tahap pengujian.
+
+\vspace{0.3cm}
+
+\noindent\textbf{4.2 Hasil Pengujian Pengiriman Data Sensor}
+\addcontentsline{toc}{subsection}{4.2 Hasil Pengujian Pengiriman Data Sensor}
+\vspace{0.1cm} % Spasi tipis
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.8\textwidth sesuai permintaan
+    \includegraphics[width=0.8\textwidth]{pengujiandata.png}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Gambar 4.2} {\textit{Dashboard ThingsBoard Cloud} menampilkan grafik suhu dan 
+kelembapan}
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+
+\justifying
+Pengujian pengiriman data dilakukan untuk memastikan bahwa \textit{sensor DHT22} mampu membaca serta mengirimkan nilai suhu dan kelembapan ke platform \textit{ThingsBoard Cloud} secara \textit{real-time} menggunakan protokol \textit{MQTT}. Pada tahap ini, perangkat \textit{ESP32-S3} dijalankan dalam kondisi terhubung ke jaringan \textit{Wi-Fi} dan dikonfigurasi agar mengirimkan data secara periodik dengan interval waktu tertentu. Setiap \textit{payload} yang dikirim berisi tiga \textit{parameter} utama:
+\begin{itemize}
+    \item Nilai suhu ($^\circ\text{C}$).
+    \item Nilai kelembapan ($\%$).
+\end{itemize}
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\justifying
+
+\begin{itemize}
+    \item Timestamp dari \textit{RTC} (\textit{Real-Time Clock}) internal \textit{ESP32-S3}.
+\end{itemize}
+
+Data yang diterima oleh \textit{ThingsBoard} kemudian divisualisasikan dalam bentuk \textit{dashboard} yang menampilkan grafik perubahan suhu dan kelembapan terhadap waktu. Hasil pengujian menunjukkan bahwa pengiriman data berlangsung stabil, dengan tingkat keterlambatan (\textit{delay}) yang sangat kecil.
+
+Untuk memastikan keakuratan waktu pengiriman, dilakukan perbandingan antara \textit{timestamp} \textit{RTC} perangkat dan \textit{timestamp} dari server \textit{ThingsBoard}. Hasil perbandingan ini kemudian digunakan pada tahap analisis \textit{latency} (dibahas pada subbab berikutnya).
+
+Selama periode pengujian yang direncanakan antara 30 September hingga 12 Oktober 2025, terdapat beberapa penyesuaian teknis yang perlu dilakukan:
+\begin{itemize}
+    \item Pada 30 September--1 Oktober, sistem belum melakukan \textit{streaming} karena masih dalam tahap pengaturan dan pembelajaran konfigurasi \textit{ThingsBoard Cloud} serta \textit{MQTT payload structure}.
+    \item Pengambilan data berjalan optimal mulai 2 Oktober hingga 13 Oktober, dengan konektivitas stabil dan \textit{payload} JSON berhasil diterima \textit{ThingsBoard} tanpa \textit{error}.
+    \item Pada 3 Oktober--4 Oktober pukul 13.00, data tidak terekam karena masih mencoba untuk pengujian daya eksternal menggunakan adaptor 5V agar bisa \textit{streaming} 24 jam dan laptop bisa dibawa kemana-mana.
+\end{itemize}
+
+Sementara itu, data untuk analisis \textit{latency} baru dapat dikumpulkan mulai 9 Oktober hingga 12 Oktober, karena pada tanggal tersebut sistem sudah berhasil menampilkan parameter ``\texttt{ts}'' (\textit{timestamp server}) dan ``\texttt{send\_time}'' (\textit{timestamp} dari ESP32-S3) yang diperlukan untuk penghitungan \textit{delay} jaringan. Kondisi tersebut menunjukkan bahwa kendala yang terjadi bersifat teknis dan telah diatasi melalui penyesuaian sistem serta konfigurasi \textit{firmware}, tanpa mempengaruhi keberhasilan utama pengujian pengiriman data.
+
+\vspace{0.3cm}
+
+\noindent\textbf{4.3 Hasil Pengujian \textit{OTA} Firmware \textit{Update}}
+\addcontentsline{toc}{subsection}{4.3 Hasil Pengujian \textit{OTA} Firmware \textit{Update}}
+
+\begin{figure}[h!]
+    
+    \centering
+    % Menggunakan width 0.9\textwidth sesuai permintaan
+    \includegraphics[width=0.9\textwidth]{otasukses.PNG}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Gambar 4.3} {Hasil Pengujian \textit{OTA} Firmware \textit{Update} }
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\justifying
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.9\textwidth sesuai permintaan
+    \includegraphics[width=0.9\textwidth]{parameterOTA.png}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Gambar 4.3.1} {Tampilan Parameter \textit{OTA} pada \textit{Thingsboard Cloud} }
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+Pengujian \textit{Over-The-Air (OTA)} dilakukan untuk memastikan bahwa sistem mampu melakukan pembaruan firmware secara jarak jauh tanpa perlu proses \textit{flashing} manual melalui kabel USB. Pada tahap ini, \textit{firmware} terbaru diunggah ke server \textit{ThingsBoard Cloud} dan kemudian dikirimkan ke perangkat \textit{ESP32-S3} menggunakan protokol \textit{MQTT} sesuai konfigurasi atribut \textit{OTA} yang telah diatur sebelumnya.
+
+Ketika pembaruan tersedia, perangkat menerima perintah dari server dan secara otomatis menjalankan proses unduh (\textit{download})}, verifikasi \textit{checksum}}, serta instalasi firmware baru ke dalam memori \textit{flash}. Selama proses berlangsung, status pembaruan dapat dipantau melalui \textit{parameter} telemetri \textit{OTA} seperti \textit{fw\_state}, \textit{fw\_version}, \textit{target\_fw\_version}, dan \textit{update\_tag}.
+
+Setelah proses instalasi selesai, perangkat menampilkan pesan ``\textit{OTA update completed, restarting\dots}'' pada terminal Ubuntu yang menandakan bahwa pembaruan berhasil dilakukan. Perangkat kemudian melakukan \textit{reboot} dan memuat firmware versi terbaru secara otomatis.
+
+Hasil pengujian menunjukkan bahwa sistem berhasil memperbarui \textit{firmware} dari versi sebelumnya ke versi terbaru (\textit{fw\_version = PaceS3-v2.0}) dengan status akhir \textit{fw\_state = IDLE}, yang menandakan tidak terdapat kesalahan selama proses pembaruan. Selain itu, proses \textit{OTA} juga berjalan stabil tanpa terjadi gangguan komunikasi antara \textit{ESP32-S3} dan \textit{ThingsBoard Cloud}.
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\noindent\textbf{4.4 Analisis \textit{Latency} dan Visualisasi Data Sensor Menggunakan \textit{Gnuplot} }
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.6\textwidth sesuai permintaan
+    \includegraphics[width=0.6\textwidth]{DataGrafikSensorAufa.jpg}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Gambar 4.4} {Grafik \textit{Temperature and Humidity} vs \textit{Time }menggunakan \textit{Gnuplot}}
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.6\textwidth sesuai permintaan
+    \includegraphics[width=0.6\textwidth]{LatencyAufa.jpg}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Gambar 4.4.1} {Grafik \textit{Latency Analysis Sensor RTC} vs \textit{ThingsBoard}}
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\justifying
+Analisis dilakukan untuk memantau performa sistem dalam melakukan transmisi data 
+sensor dan menilai tingkat \textit{latency} jaringan antara perangkat \textit{ESP32-S3} dan server 
+\textit{ThingsBoard Cloud}. Proses visualisasi dan analisis dilakukan menggunakan \textit{Gnuplot}, yang 
+berfungsi untuk menampilkan tren data sensor secara grafis serta menghitung keterlambatan 
+pengiriman data \textit{(network latency)}.
+
+Pada Gambar 4.4, ditampilkan hasil visualisasi data sensor suhu dan kelembapan yang 
+diambil selama periode 2–13 Oktober 2025. Berdasarkan grafik tersebut, terlihat bahwa nilai 
+suhu berada pada rentang 20–36°C, sedangkan kelembapan berada pada rentang 45–70%. 
+Data ditampilkan secara \textit{real-time} melalui \textit{ThingsBoard Cloud}, di mana setiap titik mewakili 
+\textit{payload} JSON yang berisi parameter \textit{temperature, humidity,} dan \textit{timestamp}. 
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+Terlihat adanya jeda data pada tanggal 3 Oktober, yang disebabkan oleh proses 
+pengujian daya eksternal menggunakan adaptor 5V agar sistem dapat melakukan \textit{streaming} 
+24 jam tanpa koneksi laptop langsung. Setelah penyesuaian, pengambilan data kembali stabil 
+hingga tanggal 13 Oktober. 
+
+Selanjutnya, untuk analisis \textit{latency} ditampilkan pada Gambar 4.4.1. Grafik tersebut dihasilkan dari hasil pengolahan data menggunakan perintah \textit{Gnuplot} yang membandingkan perbedaan waktu antara \textit{send\_time} (\textit{timestamp} dari \textit{RTC ESP32-S3}) dan \textit{ts} (\textit{timestamp} dari server \textit{ThingsBoard}). Pengambilan data dilakukan pada \textit{9--12 Oktober 2025}, yaitu saat sistem sudah berhasil menampilkan kedua \textit{parameter} tersebut.   
+
+Hasil pengamatan menunjukkan bahwa nilai \textit{latency} rata-rata berada di kisaran 1,4 
+detik, dengan fluktuasi kecil yang diakibatkan oleh kondisi jaringan \textit{Wi-Fi} lokal. Pola data 
+yang relatif stabil menunjukkan bahwa komunikasi \textit{MQTT} antara perangkat dan server 
+berjalan dengan baik tanpa kehilangan paket \textit{(packet loss)}. Beberapa \textit{spike delay} yang terlihat 
+disebabkan oleh proses \textit{refresh} koneksi \textit{MQTT} ketika server melakukan pembaruan session. 
+
+Secara keseluruhan, hasil ini menunjukkan bahwa sistem stabil, andal, dan responsif 
+dalam melakukan pengiriman data sensor ke cloud, dengan tingkat keterlambatan yang masih 
+dalam batas wajar untuk sistem \textit{IoT} berbasis \textit{Wi-Fi}.
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\begin{center}
+\textbf{BAB V KESIMPULAN DAN SARAN}
+\addcontentsline{toc}{chapter}{BAB V KESIMPULAN DAN SARAN}
+\end{center}
+\vspace{0.3cm}
+
+\noindent\textbf{5.1 Kesimpulan}
+\vspace{0.1cm} % Spasi tipis di bawah judul
+
+\justifying
+% Paragraf pertama MENJOROK
+Berdasarkan hasil perancangan, implementasi, dan pengujian sistem monitoring suhu dan kelembapan menggunakan mikrokontroler \textit{ESP32-S3}, sensor \textit{DHT22}, dan platform \textit{ThingsBoard Cloud} dengan protokol \textit{MQTT}, dapat disimpulkan bahwa sistem yang dibuat telah berhasil berfungsi dengan baik. Perangkat mampu mengirimkan data suhu dan kelembapan secara \textit{real-time} ke \textit{ThingsBoard} dalam format JSON yang berisi suhu, kelembapan, dan \textit{timestamp} dari \textit{RTC} internal \textit{ESP32-S3}. Hasil pengujian menunjukkan proses komunikasi antara perangkat dan server berjalan stabil tanpa kehilangan paket data, serta mampu mempertahankan konektivitas dalam jangka waktu lama selama periode pengujian dari 2 hingga 13 Oktober 2025. Berdasarkan analisis \textit{Gnuplot} terhadap perbandingan antara \textit{send\_time} dan \textit{timestamp} \textit{Thingsboard}, diperoleh rata-rata \textit{network latency} sekitar 1,4 detik, yang menandakan keterlambatan pengiriman data tergolong sangat kecil dan masih dalam batas normal. Selain itu, fitur \textit{OTA} (\textit{Over-The-Air}) \textit{firmware update} juga berhasil diimplementasikan dengan baik, di mana perangkat dapat melakukan pembaruan \textit{firmware} secara otomatis dari \textit{ThingsBoard} tanpa perlu pemrograman manual, dengan status pembaruan yang terpantau melalui parameter \textit{fw\_state} dan \textit{fw\_version}. Secara keseluruhan, sistem ini telah memenuhi tujuan utama \textit{project}, yaitu menghasilkan sistem \textit{IoT} berbasis \textit{cloud} yang efisien, stabil, dan mudah diperbarui dari jarak jauh}.
+\vspace{0.1cm}
+
+\noindent\textbf{5.2 Saran}
+\vspace{0.1cm} % Spasi tipis di bawah judul
+
+\justifying
+% Paragraf pertama MENJOROK
+Untuk pengembangan selanjutnya, sistem ini masih bisa ditingkatkan dari sisi efisiensi daya 
+dan keandalan pengiriman data. Saat ini, perangkat masih bergantung pada adaptor 5V sebagai 
+sumber utama, sehingga jika terjadi pemadaman listrik sistem akan berhenti bekerja. Oleh karena 
+itu, dapat ditambahkan modul baterai serta rangkaian manajemen daya agar perangkat tetap aktif 
+sementara waktu ketika sumber daya utama terputus.
+
+Selain itu, sistem juga dapat dilengkapi dengan mekanisme penyimpanan data lokal 
+sementara \textit{(offline buffer)}. Fungsinya untuk menampung data sensor ketika koneksi \textit{WiFi} 
+terputus, lalu mengirimkannya kembali ke \textit{ThingsBoard Cloud} setelah koneksi pulih. Dengan 
+cara ini, tidak ada data yang hilang dan hasil pemantauan tetap lengkap.
+
+Dari sisi keamanan, komunikasi \textit{MQTT} juga bisa ditingkatkan menggunakan enkripsi TLS/SSL agar proses pertukaran data dan pembaruan \textit{OTA} lebih aman. Terakhir, tampilan \textit{dashboard} di \textit{ThingsBoard} dapat dikembangkan dengan menam-
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\justifying
+% Paragraf pertama MENJOROK
+notifikasi otomatis saat 
+suhu atau kelembapan melebihi batas, serta indikator status \textit{OTA} agar pengguna lebih mudah 
+memantau kondisi perangkat. Dengan pengembangan tersebut, sistem ini berpotensi diterapkan 
+pada skala yang lebih luas seperti \textit{monitoring} lingkungan atau sistem industri kecil yang 
+membutuhkan pemantauan jarak jauh secara \textit{real-time} dan aman.
+
+\newpage
+
+\begin{center}
+    \textbf{DAFTAR PUSTAKA}
+\end{center}
+\vspace{0.5cm}
+
+\setlength{\parindent}{1cm} % Menjorok sedikit di awal paragraf
+\setlength{\parskip}{4pt}   % Jarak antar pustaka
+
+Hercog, D., Lerher, T., Truntič, M., \& Težak, O. (2023). Design and implementation of ESP32-based IoT devices. \textit{Sensors (Basel)}, 23(15), 6739. \url{https://doi.org/10.3390/s23156739}
+
+Aghenta, L. O., \& Iqbal, M. T. (2020). Design and implementation of a low-cost, open source IoT-based SCADA system using ESP32 with OLED, ThingsBoard and MQTT protocol. \textit{AIMS Electronics and Electrical Engineering}, 4(1), 57–74. \url{https://doi.org/10.3934/electreng.2020.1.57}
+
+El Jaouhari, S., \& Bouvet, E. (2022). Secure over-the-air updates for IoT: Survey, challenges, and discussions. \textit{Internet of Things}, 18, 100508. \url{https://doi.org/10.1016/j.iot.2022.100508}
+
+Al-Fuqaha, A., Guizani, M., Mohammadi, M., Aledhari, M., \& Ayyash, M. (2015). Internet of Things: A survey on enabling technologies, protocols, and applications. \textit{IEEE Communications Surveys \& Tutorials}, 17(4), 2347–2376. \url{https://doi.org/10.1109/COMST.2015.2444095}
+
+Integrating Edge Computing and IoT for Real-Time Air and Water Quality Monitoring Systems. (2025). \textit{International Journal of Environmental Sciences}, 11(17s). \url{https://doi.org/10.64252/z52kvj10}
+
+Peng, F. (2024). Environment Monitoring based on the Integration of Edge Computing and Multimodal Sensors. \textit{Applied and Computational Engineering}, 113, 77–82. \url{https://doi.org/10.54254/2755-2721/2024.18307}
+
+Roostaei, J., \& co. (2023). IoT-based edge computing (IoTEC) for improved environmental monitoring. \textit{ScienceDirect}.
+
+Montesclaros, R. M. M., Cruz, J. E. B., Parocha, R. C., \& Macabebe, E. Q. B. (2021). MQTT Based Power Consumption Monitoring with Usage Pattern Visualization Using Uniform Manifold Approximation and Projection for Smart Buildings. \textit{Proceedings of the Intelligent Computing Conference 2021 (Virtual)}. Springer Nature. \url{https://doi.org/10.1007/978-3-030-80126-7_79}
+
+Shvaika, A., Shvaika, D., Landiak, D., et al. (2025). A distributed architecture for MQTT messaging: the case of TBMQ. \textit{Journal of Big Data}, 12, 224. \url{https://doi.org/10.1186/s40537-025-01271-x}
+
+El-Basioni, B. M. M. (2024). A conceptual modeling approach of MQTT for IoT-based systems. \textit{Journal of Electrical Systems and Information Technology}, 11, Article 62. \url{https://doi.org/10.1186/s43067-024-00181-x}
+
+Nitol Saha, Md. Masruk Aulia, Md. Mostafizur Rahman, Mohammed Shafiul Alam Khan. (2024). IoT-Driven Cloud-based Energy and Environment Monitoring System for Manufacturing Industry. \textit{arXiv preprint}.
+
+Ahmad, Y. A., Gunawan, T. S., Mansor, H., Hamida, B. A., Hishamudin, A. F., \& Arifin, F. (2021). On the evaluation of DHT22 temperature sensor for IoT application. \textit{Proceedings of the 2021 8th International Conference on Computer and Communication Engineering (ICCCE 2021)}, 131–134.\url{https://its.id/m/352914267OntheEvaluationofDHT22TemperatureSensor}
+
+Yulizar, D., Soekirno, S., Ananda, N., Prabowo, M. A., Putra Perdana, I. F., \& Aofany, D. (2023). Performance analysis comparison of DHT11, DHT22, and DS18B20 temperature sensors. \textit{Proceedings of the 2023 International Conference on Computing and Applied Electronics}. Atlantis Press. \url{https://www.atlantis-press.com/article/125989928.pdf}
+
+Putri, P., Saragi, M. A., \& Hasibuan, Y. A. E. H. (2024). A prototype IoT temperature and humidity monitoring ESP32-based via ThingSpeak. \textit{INFOKUM: Jurnal Informatika dan Komputer}, 13(1), 15–21. \url{https://infor.seaninstitute.org/index.php/infokum/article/view/2755}
+
+Wardani, I. K., Ichniarsyah, A. N., Telaumbanua, M., Priyonggo, B., Fil’aini, R., Mufidah, Z., \& Dewangga, D. A. (2024). The feasibility study: Accuracy and precision of DHT22 in measuring the temperature and humidity in the greenhouse. \textit{IOP Conference Series: Earth and Environmental Science}, 1290(1), 012032. \url{https://doi.org/10.1088/1755-1315/1290/1/012032}
+
+Amirkhanov, B., Amirkhanova, G., Kunelbayev, M., Adilzhanova, S., \& Tokhtassyn, M. (2025). Evaluating HTTP, MQTT over TCP and MQTT over WebSocket for digital twin applications: A comparative analysis on latency, stability, and integration. \textit{International Journal of Innovative Research and Scientific Studies}, 8(1), 679–694. \url{https://doi.org/10.53894/ijirss.v8i1.4414}
+
+Palmese, F., Redondi, A. E. C., \& Cesana, M. (2022). Adaptive Quality of Service Control for MQTT-SN. \textit{Sensors}, 22(22), 8852. \url{https://doi.org/10.3390/s22228852}
+
+Puthiyidam, J. J., \& Joseph, S. (2024). Internet of things network performance: Impact of message and client sizes and reliability levels. \textit{ECTI Transactions on Electrical Engineering, Electronics, and Communications}, 22(1). \url{https://doi.org/10.37936/ecti-eec.2024221.252941}
+
+Park, C.-Y., Lee, S.-J., \& Lee, I.-G. (2025). Secure and lightweight Over-the-Air update mechanism for Internet of Things. \textit{Electronics}, 14(8), 1583. \url{https://doi.org/10.3390/electronics14081583}
+
+Malumbres, V., Saldana, J., Berné, G., \& Modrego, J. (2024). Updates over the air via LoRa: Unicast and broadcast combination for boosting update speed. \textit{Sensors}, 24(7), 2104. \url{https://doi.org/10.3390/s24072104}
+
+Wei, W., Banerjee, J., Islam, S., Pan, C., \& Xie, M. (2023). Energy-aware Incremental OTA Update for Flash-based Batteryless IoT Devices. \textit{arXiv preprint arXiv:2406.12189}. \url{https://arxiv.org/abs/2406.12189}
+
+Atzori, L., Iera, A., \& Morabito, G. (2016). Understanding the Internet of Things: Definition, potentials, and societal role of a fast evolving paradigm. \textit{Ad Hoc Networks}, 56, 122–140. \url{https://doi.org/10.1016/j.adhoc.2016.12.004}
+
+Ray, P. P. (2016). A survey on Internet of Things architectures. \textit{Journal of King Saud University – Computer and Information Sciences}, 30(3), 291–319. \url{https://doi.org/10.1016/j.jksuci.2016.10.003}
+
+Espressif Systems. (2022). ESP32-S3 Series Datasheet. \textit{Espressif Systems}. \url{https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf}
+
+Nemlaha, E., Strelec, P., Horák, T., Kováč, S., \& Tanuška, P. (2023). Suitability of MQTT and REST Communication Protocols for AIoT or IIoT Devices Based on ESP32-S3. \textit{ResearchGate}. \url{https://www.researchgate.net/publication/366776204}
+
+Wang, T., Wang, L., \& Yan, P. (2022). Application of embedded Linux in the design of Internet of Things gateway. \textit{Journal of Intelligent Systems}, 31(1), 1014–1023. \url{https://doi.org/10.1515/jisys-2021-0208}
+
+Chaudhary, H., Anthony, A., Abiona, O., \& Onime, C. (2025). Unix-Based Systems in Embedded and IoT Devices: Exploring the Versatility and Robustness. \textit{International Journal of Communications, Network and System Sciences}, 18, 15–25. \url{https://doi.org/10.4236/ijcns.2025.182002}
+
+Farina, M. D. O., Pohren, D. H., Roque, A. dos S., Silva, A., da Costa, J. P. J., Fontoura, L. M., … \& Freitas, E. P. de. (2024). Hardware-Independent Embedded Architecture Framework. \textit{Journal of Internet Services and Applications}, 15(1), 14–24. \url{https://doi.org/10.5753/jisa.2024.3634}
+
+Amanlou, S. (2020). Lightweight security mechanism over MQTT protocol for IoT devices. \textit{International Journal of Advanced Computer Science and Applications}, 11(7). \url{https://doi.org/10.14569/IJACSA.2020.0110726}
+
+Seoane, V., García-Rubio, C., Almenares, F., \& Campo, C. (2021). Performance evaluation of CoAP and MQTT with security support for IoT environments. \textit{Computer Networks}. \url{https://doi.org/10.1016/j.comnet.2021.108338}
+
+Panagou, I. C., Katsoulis, S., Nannos, E., Zantalis, F., \& Koulouras, G. (2025). A Comprehensive Evaluation of IoT Cloud Platforms: A Feature-Driven Review with a Decision-Making Tool. \textit{Sensors}, 25(16), 5124. \url{https://doi.org/10.3390/s25165124}
+
+Shvaika, D. I., Shvaika, A. I., \& Artemchuk, V. O. (2024). Advancing IoT interoperability: Dynamic data serialization using ThingsBoard. \textit{Journal of Edge Computing}, 3(2), 126–135. \url{https://doi.org/10.55056/jec.74}
+
+Plauska, I., Liutkevičius, A., \& Janavičiūtė, A. (2023). Performance Evaluation of C/C++, MicroPython, Rust and TinyGo Programming Languages on ESP32 Microcontroller. \textit{Electronics}, 12(1), 143. \url{https://doi.org/10.3390/electronics12010143}
+
+Culic, I., Vochescu, A., \& Radovici, A. (2022). A Low-Latency Optimization of a Rust-Based Secure Operating System for Embedded Devices. \textit{Sensors}, 22(22), 8700. \url{https://doi.org/10.3390/s22228700}
+
+Sharma, A., Sharma, S., Torres-Arias, S., \& Machiry, A. (2023). Rust for Embedded Systems: Current State, Challenges and Open Problems (Extended Report). \textit{arXiv}. \url{https://arxiv.org/abs/2311.05063}
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\begin{center}
+\textbf{LAMPIRAN}
+\end{center}
+\vspace{0.3cm}
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.3\textwidth sesuai permintaan
+    \includegraphics[width=0.3\textwidth]{esp.jpeg}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Lampiran 1.} {\textit{ESPS3-32} terhubung dengan adaptor dan sensor \textit {DHT22}}
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.8\textwidth sesuai permintaan
+    \includegraphics[width=0.8\textwidth]{konek.jpeg}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Lampiran 2.} {Tampilan konektivitas di terminal \textit {Ubuntu}}
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+     \centering
+    % Menggunakan width 0.8\textwidth sesuai permintaan
+    \includegraphics[width=0.8\textwidth]{pengujiandata.png}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Lampiran 3.} {\textit{Dashboard ThingsBoard Cloud} menampilkan grafik suhu dan kelembapan}
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.9\textwidth sesuai permintaan
+    \includegraphics[width=0.9\textwidth]{otasukses.PNG}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Lampiran 4.} {Hasil Pengujian \textit{OTA} Firmware \textit{Update} }
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+    \centering
+    % Menggunakan width 0.9\textwidth sesuai permintaan
+    \includegraphics[width=0.9\textwidth]{parameterOTA.png}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Lampiran 5.} {Tampilan Parameter \textit{OTA} pada \textit{Thingsboard Cloud} }
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\newpage
+\thispagestyle{plain}
+
+% --- Mulai pengaturan spasi 1.5 ---
+\onehalfspacing 
+% --- Akhir pengaturan spasi 1.5 ---
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+     \centering
+    % Menggunakan width 0.8\textwidth sesuai permintaan
+    \includegraphics[width=0.8\textwidth]{DataGrafikSensorAufa.jpg}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Lampiran 6.} {Grafik \textit{Temperature and Humidity} vs \textit{Time }menggunakan \textit{Gnuplot}}
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\begin{figure}[h!]
+    \vfill % Spasi vertikal di atas gambar
+    
+     \centering
+    % Menggunakan width 0.8\textwidth sesuai permintaan
+    \includegraphics[width=0.8\textwidth]{LatencyAufa.jpg}
+
+    % MENGHILANGKAN KATA "Gambar" 
+    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
+    \caption{\textbf{Lampiran 7.} {Grafik \textit{Latency Analysis Sensor RTC} vs \textit{ThingsBoard}}
+    
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
+    
+    \vfill % Spasi vertikal di bawah gambar
+\end{figure}
+
+\newpage
+\begin{}
+\begin{tabular}{|p{\textwidth}|}
         \hline
         \texttt{// ----------------------------------------------------------------------} \\
         \texttt{// \#![no\_std] Architecture Implementation} \\
@@ -712,16 +1366,6 @@ Sementara itu, file \texttt{cargo\_OTA} digunakan untuk mendukung proses \textit
         \texttt{// Komponen network/OS disediakan oleh esp-idf-svc, yang berjalan di atas} \\
         \texttt{// FreeRTOS.} \\
         \texttt{// ------------------------------------------------------------------------------------------} \\
-    
-        \hline
-    \end{tabular}
-\end{table}
-
-\newpage
-\thispagestyle{plain}
-\begin{}
-
-    \begin{tabular}{|p{\textwidth}|}
         \hline
         \texttt{// ----------------------------------------} \\
                 \texttt{use core::\{} \\
@@ -753,10 +1397,6 @@ Sementara itu, file \texttt{cargo\_OTA} digunakan untuk mendukung proses \textit
         \texttt{        delay::Ets,} \\
         \texttt{        // Driver pin yang eksplisit untuk interaksi perangkat keras langsung} \\
         \texttt{        gpio::PinDriver,} \\
-        \texttt{        prelude::*,} \\
-        \texttt{    \},} \\
-        \texttt{    log::EspLogger,} \\
-        \hline
     \end{tabular}
 \end{table}
 
@@ -766,6 +1406,9 @@ Sementara itu, file \texttt{cargo\_OTA} digunakan untuk mendukung proses \textit
 
     \begin{tabular}{|p{\textwidth}|}
         \hline
+        \texttt{        prelude::*,} \\
+        \texttt{    \},} \\
+        \texttt{    log::EspLogger,} \\
         \texttt{mqtt::client::\*,} \\
         \texttt{nvs::EspDefaultNvsPartition,} \\
         \texttt{sntp,} \\
@@ -1351,39 +1994,12 @@ Sementara itu, file \texttt{cargo\_OTA} digunakan untuk mendukung proses \textit
         \hline
     \end{tabular}
 \end{table}
-
-\vspace{0.4cm} % Spasi tipis di bawah judul
-\onehalfspacing
-Program utama dikembangkan menggunakan bahasa pemrograman \textit{Rust} dengan pendekatan \textit{bare-metal} (\texttt{\#\![no\_std]}), sehingga dapat berjalan langsung pada mikrokontroler \textit{ESP32-S3} tanpa sistem operasi tambahan. Pendekatan ini membuat sistem lebih ringan dan efisien dalam penggunaan memori.
+\begin{center}
+    \caption{\textbf{Lampiran 8.} {Program Utama (main.rs)}
+\end{center}
+    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
 
 \newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing
-% --- Akhir pengaturan spasi 1.5 ---
-
-\justifying
-
-Pada tahap awal, dilakukan inisialisasi perangkat keras seperti \texttt{GPIO}, \textit{driver delay}, serta konfigurasi \textit{Wi-Fi} menggunakan pustaka \textit{EspWifi}. Setelah perangkat berhasil terhubung ke jaringan, sistem melakukan sinkronisasi waktu melalui \textit{NTP} (\textit{Network Time Protocol}) agar waktu pengiriman data sesuai dengan waktu aktual.
-
-Selanjutnya, sistem menginisialisasi koneksi ke broker \textit{MQTT} milik \textit{ThingsBoard Cloud} menggunakan token autentikasi perangkat. Setelah koneksi berhasil, perangkat mulai membaca nilai suhu dan kelembapan dari sensor DHT22 yang terhubung ke pin GPIO4. Data hasil pembacaan sensor dikirim ke \textit{ThingsBoard} dalam format JSON dengan parameter:
-\begin{itemize}
-    \item \texttt{send\_time}: waktu lokal perangkat saat data dikirim,
-    \item \texttt{ts}: timestamp dari sistem dalam milidetik,
-    \item \texttt{temperature}: nilai suhu dalam ${}^\circ\text{C}$,
-    \item \texttt{humidity}: nilai kelembapan dalam $\%$.
-\end{itemize}
-
-\textit{Payload} data dikirim ke topik \texttt{v1/devices/me/telemetry} setiap 60 detik. Proses ini menghasilkan pesan di terminal seperti ``data terkirim'', yang menandakan bahwa proses pengiriman data telah berhasil.
-
-Selain itu, perangkat juga dilengkapi dengan fitur \textit{Over-The-Air (OTA) \textit{Firmware Update}}, yang memungkinkan pembaruan \textit{firmware} dilakukan langsung melalui \textit{ThingsBoard} tanpa kabel. Ketika pembaruan tersedia, sistem akan menerima perintah dari \textit{server}, mengunduh \textit{firmware} baru, menulisnya ke memori \textit{flash}, dan menampilkan pesan ``\texttt{OTA selesai, restart...}'' sebelum melakukan \textit{restart} otomatis untuk memuat \textit{firmware} versi terbaru.
-
-Dengan penerapan program ini, sistem terbukti mampu melakukan pembacaan sensor, pengiriman data, serta pembaruan \textit{firmware} secara otomatis melalui jaringan.
-
-\noindent\textbf{3.4.2 Konfigurasi Build dan Depensi(\texttt{Cargo.toml})}
-\vspace{0.3cm} % Spasi tipis di bawah judul
-
 \begin{}
 \linespread{0.8}\selectfont %
     \begin{tabular}{|p{\textwidth}|}
@@ -1402,16 +2018,6 @@ Dengan penerapan program ini, sistem terbukti mampu melakukan pembacaan sensor, 
         \texttt{} \\
         \texttt{[profile.release]} \\
         \texttt{opt-level = "s"} \\
-        \hline
-    \end{tabular}
-\end{table}
-
-\newpage
-\thispagestyle{plain}
-\begin{}
-\linespread{0.8}\selectfont % Mengurangi spasi
-    \begin{tabular}{|p{\textwidth}|}
-        \hline
         \texttt{[profile.dev]} \\
         \texttt{debug = true \# Symbols are nice and they don't increase the size on Flash} \\
         \texttt{opt-level = "z"} \\
@@ -1447,667 +2053,15 @@ Dengan penerapan program ini, sistem terbukti mampu melakukan pembacaan sensor, 
         \hline
     \end{tabular}
 \end{table}
-
-\vspace{0.4cm} % Spasi tipis di bawah judul
-\onehalfspacing
-Bagian ini berisi pengaturan utama proyek \textit{Rust} yang digunakan untuk membangun sistem di mikrokontroler \textit{ESP32-S3}. File \texttt{Cargo.toml} mengatur identitas proyek, versi, serta pustaka-pustaka ({dependensi}) yang dibutuhkan agar program bisa dijalankan dengan baik.
-
-Pada bagian \texttt{[package]}, ditulis nama proyek \texttt{streamdht}, versi program, nama penulis, serta edisi Rust yang dipakai. Baris \texttt{harness = false} digunakan supaya Cargo tidak menjalankan mode pengujian otomatis, karena program ini langsung dijalankan di mikrokontroler, bukan di komputer biasa.
-
-Bagian \texttt{[profile]} mengatur mode kompilasi. Mode \texttt{release} menggunakan optimasi agar ukuran file hasil \textit{build} lebih kecil, sedangkan mode \texttt{dev} digunakan saat pengujian agar lebih mudah melihat log atau error. Kemudian di bagian
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing
-% --- Akhir pengaturan spasi 1.5 ---
-
-\justifying
-\texttt{[dependencies]}, terdapat beberapa pustaka penting seperti:
-\begin{itemize}
-    \item \texttt{esp-idf-svc} untuk koneksi Wi-Fi, MQTT, dan pengelolaan sistem.
-    \item \texttt{dht-sensor} untuk membaca data suhu dan kelembapan dari sensor DHT22.
-    \item \texttt{serde\_json} untuk membentuk data JSON sebelum dikirim ke ThingsBoard.
-    \item \texttt{chrono} untuk mengatur waktu dan \textit{timestamp}.
-    \item \texttt{anyhow} dan \texttt{log} untuk membantu proses \textit{debug} dan pencatatan \textit{log} program.
-\end{itemize}
-
-Selain itu, ada juga \texttt{embuild} di bagian \texttt{[build-dependencies]} yang membantu proses kompilasi otomatis ke dalam format yang bisa dijalankan di \textit {ESP32}. Secara keseluruhan, file \texttt{Cargo.toml} ini berfungsi untuk memastikan semua pustaka dan pengaturan yang dibutuhkan sudah lengkap, sehingga proses \textit{build} berjalan lancar dan program bisa dikompilasi ke perangkat tanpa \textit{error}.
-
-\vspace{0.3cm}
-
-\noindent\textbf{3.4.3 Rancangan Tampilan \textit {Dashboard ThingsBoard}}
-\addcontentsline{toc}{subsection}{3.4.3 Rancangan Tampilan Dashboard ThingsBoard}
-\vspace{0.1cm} % Spasi tipis
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.8\textwidth sesuai permintaan
-    \includegraphics[width=0.8\textwidth]{dashboard.png}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Gambar 3.4.3 } Rancangan tampilan {\textit{Dashboard Monitoring} pada \textit{Thingsboard}
-  
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-Bagian ini menampilkan rancangan \textit{dashboard} ThingsBoard Cloud yang digunakan untuk memantau data hasil pembacaan sensor DHT22 secara \textit{real-time}. \textit{Dashboard} ini dibuat untuk memudahkan pengguna dalam mengamati perubahan nilai suhu dan kelembapan yang dikirim oleh perangkat ESP32-S3 setiap 60 detik.
-
-Tampilan \textit{dashboard} terdiri dari dua komponen utama, yaitu \textit{grafik time series} dan \textit{tabel data telemetry}. Grafik \textit{time series} digunakan untuk memperlihatkan tren perubahan suhu dan kelembapan terhadap waktu dalam bentuk garis berwarna, di mana garis biru menunjukkan suhu (\textit{temperature}) dan garis hijau menunjukkan kelembapan (\textit{humidity}). Sementara itu, tabel di sisi kanan berisi data lengkap seperti \textit{timestamp}, \textit{temperature}, \textit{humidity}.
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\justifying
-
-\texttt send\_time, dan \texttt{fw\_state} yang dikirim melalui protokol \textit{MQTT} ke server \textit{ThingsBoard}.
-
-Dari tampilan tersebut, pengguna dapat melihat data sensor secara langsung tanpa harus mengakses perangkat fisik. Informasi yang dikirim dalam format JSON ini memungkinkan proses \textit{monitoring} berjalan otomatis, sehingga sistem menjadi lebih efisien dan mudah dikembangkan untuk kebutuhan \textit{IoT} berbasis \textit{Cloud}.
-
-\vspace{0.3cm}
-
-\noindent\textbf{3.4.4 Perintah Gnuplot untuk Visualisasi Data Sensor dan Analisis Latensi}
-\addcontentsline{toc}{subsection}{3.4.4 Perintah Gnuplot untuk Visualisasi Data Sensor dan Analisis Latensi}
-\vspace{0.1cm} % Spasi tipis
-
-Pada tahap ini dilakukan proses visualisasi data menggunakan \textit{Gnuplot} yang dijalankan melalui terminal \textit{Ubuntu}. Gnuplot digunakan untuk menampilkan grafik hasil pembacaan suhu (\textit{temperature}) dan kelembapan (\textit{humidity}) yang dikirim dari sensor ke platform \textit{ThingsBoard}, serta untuk menganalisis latensi pengiriman data antara sensor dan server.
-
-Langkah awal yang dilakukan yaitu membuka terminal, lalu menjalankan Gnuplot dengan mengetikkan perintah \texttt{gnuplot}. Setelah itu, sistem dikonfigurasi agar dapat membaca file data CSV hasil pengukuran sensor dengan memisahkan nilai-nilai menggunakan tanda ``\texttt{,}''. Berikut adalah contoh perintah yang digunakan untuk menampilkan grafik suhu dan kelembapan:
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.6\textwidth sesuai permintaan
-    \includegraphics[width=0.6\textwidth]{perintahdatasensor.jpeg}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Gambar 3.4.4 } Perintah {\textit{Gnuplot} untuk Visualisasi Data Sensor 
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-Perintah di atas digunakan untuk menampilkan grafik dengan dua sumbu Y. Hasil grafik menunjukkan perubahan nilai suhu dan kelembapan dari waktu ke waktu berdasarkan data yang diterima oleh ThingsBoard.
-
-Selain itu, dilakukan juga analisis latensi untuk mengetahui jeda waktu antara pembacaan data di sensor dan penerimaan data di server. Proses ini juga dijalankan melalui terminal dengan \texttt{Gnuplot} menggunakan file \texttt{latency\_ready.csv}. Berikut perintahnya:
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\justifying
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.6\textwidth sesuai permintaan
-    \includegraphics[width=0.6\textwidth]{perintahlatensi.jpeg}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Gambar 3.4.4.1} Perintah {\textit{Gnuplot} untuk Grafik Latensi
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-Dari hasil grafik latensi yang dihasilkan, dapat diamati variasi waktu tunda (\textit{delay}) dalam satuan detik antara sensor dan server \textit{ThingsBoard}. Nilai latensi yang relatif kecil dan stabil menunjukkan bahwa proses komunikasi data berjalan dengan baik tanpa adanya gangguan jaringan yang berarti.
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
 \begin{center}
-\textbf{BAB IV ANALISIS DAN HASIL PEMBAHASAN}
+    \caption{\textbf{Lampiran 9.} {Konfigurasi Build dan Depensi (Cargo.toml)}
 \end{center}
-\vspace{0.3cm}
-
-\noindent\textbf{4.1 Hasil Implementasi Sistem}
-\vspace{0.1cm} % Spasi tipis di bawah judul utama
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.3\textwidth sesuai permintaan
-    \includegraphics[width=0.3\textwidth]{esp.jpeg}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Gambar 4.1} {\textit{ESPS3-32} terhubung dengan adaptor dan sensor \textit {DHT22}}
-    
     \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.6\textwidth sesuai permintaan
-    \includegraphics[width=0.6\textwidth]{konek.jpeg}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Gambar 4.1.1} {Tampilan konektivitas di terminal \textit {Ubuntu}}
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\justifying
-Implementasi sistem dilakukan dengan merangkai \textit{ESP32-S3}, \textit{sensor DHT22}, serta komponen pendukung seperti kabel \textit{jumper}, dan adaptor 5V sebagai sumber daya utama. Mikrokontroler dihubungkan ke \textit{laptop} menggunakan kabel USB untuk proses pemrograman \textit{firmware} berbasis \textit{Rust}.
-
-Proses implementasi dimulai dengan \textit{build} proyek menggunakan perintah \textit{cargo build}, kemudian dilakukan \textit{upload} program melalui \texitt{cargo flash} agar \textit{firmware} dapat dijalankan langsung pada mikrokontroler. Setelah proses \textit{flashing} berhasil, sistem menampilkan \textit{log}:
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\justifying
-
-eksekusi di terminal Ubuntu. Dari hasil pengujian, terminal menampilkan beberapa status penting seperti:
-\begin{itemize}
-    \item ``\textit{Connected to Wi-Fi}'' $\to$ menunjukkan bahwa perangkat berhasil tersambung ke jaringan.
-    \item ``\textit{MQTT broker connected}'' $\to$ sistem telah terhubung dengan server \textit{ThingsBoard} melalui protokol \textit{MQTT}.
-    \item ``\texttt{Data terkirim (humidity, temperature)}'' $\to$ menandakan data sensor telah berhasil dipublikasikan ke \textit{Cloud}.
-    \item ``{Selain itu, hasil implementasi menunjukkan bahwa perangkat juga mampu 
-melakukan pembaruan firmware melalui mekanisme \textit {OTA (Over-The-Air)}.
-\end{itemize}
-
-Secara keseluruhan, hasil implementasi menunjukkan bahwa proses komunikasi dan pembacaan sistem berjalan stabil tanpa adanya \textit{error} pada tahap pengujian.
-
-\vspace{0.3cm}
-
-\noindent\textbf{4.2 Hasil Pengujian Pengiriman Data Sensor}
-\addcontentsline{toc}{subsection}{4.2 Hasil Pengujian Pengiriman Data Sensor}
-\vspace{0.1cm} % Spasi tipis
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.8\textwidth sesuai permintaan
-    \includegraphics[width=0.8\textwidth]{pengujiandata.png}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Gambar 4.2} {\textit{Dashboard ThingsBoard Cloud} menampilkan grafik suhu dan 
-kelembapan}
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-
-\justifying
-Pengujian pengiriman data dilakukan untuk memastikan bahwa \textit{sensor DHT22} mampu membaca serta mengirimkan nilai suhu dan kelembapan ke platform \textit{ThingsBoard Cloud} secara \textit{real-time} menggunakan protokol \textit{MQTT}. Pada tahap ini, perangkat \textit{ESP32-S3} dijalankan dalam kondisi terhubung ke jaringan \textit{Wi-Fi} dan dikonfigurasi agar mengirimkan data secara periodik dengan interval waktu tertentu. Setiap \textit{payload} yang dikirim berisi tiga \textit{parameter} utama:
-\begin{itemize}
-    \item Nilai suhu ($^\circ\text{C}$).
-    \item Nilai kelembapan ($\%$).
-\end{itemize}
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\justifying
-
-\begin{itemize}
-    \item Timestamp dari \textit{RTC} (\textit{Real-Time Clock}) internal \textit{ESP32-S3}.
-\end{itemize}
-
-Data yang diterima oleh \textit{ThingsBoard} kemudian divisualisasikan dalam bentuk \textit{dashboard} yang menampilkan grafik perubahan suhu dan kelembapan terhadap waktu. Hasil pengujian menunjukkan bahwa pengiriman data berlangsung stabil, dengan tingkat keterlambatan (\textit{delay}) yang sangat kecil.
-
-Untuk memastikan keakuratan waktu pengiriman, dilakukan perbandingan antara \textit{timestamp} \textit{RTC} perangkat dan \textit{timestamp} dari server \textit{ThingsBoard}. Hasil perbandingan ini kemudian digunakan pada tahap analisis \textit{latency} (dibahas pada subbab berikutnya).
-
-Selama periode pengujian yang direncanakan antara 30 September hingga 12 Oktober 2025, terdapat beberapa penyesuaian teknis yang perlu dilakukan:
-\begin{itemize}
-    \item Pada 30 September--1 Oktober, sistem belum melakukan \textit{streaming} karena masih dalam tahap pengaturan dan pembelajaran konfigurasi \textit{ThingsBoard Cloud} serta \textit{MQTT payload structure}.
-    \item Pengambilan data berjalan optimal mulai 2 Oktober hingga 13 Oktober, dengan konektivitas stabil dan \textit{payload} JSON berhasil diterima \textit{ThingsBoard} tanpa \textit{error}.
-    \item Pada 3 Oktober--4 Oktober pukul 13.00, data tidak terekam karena masih mencoba untuk pengujian daya eksternal menggunakan adaptor 5V agar bisa \textit{streaming} 24 jam dan laptop bisa dibawa kemana-mana.
-\end{itemize}
-
-Sementara itu, data untuk analisis \textit{latency} baru dapat dikumpulkan mulai 9 Oktober hingga 12 Oktober, karena pada tanggal tersebut sistem sudah berhasil menampilkan parameter ``\texttt{ts}'' (\textit{timestamp server}) dan ``\texttt{send\_time}'' (\textit{timestamp} dari ESP32-S3) yang diperlukan untuk penghitungan \textit{delay} jaringan. Kondisi tersebut menunjukkan bahwa kendala yang terjadi bersifat teknis dan telah diatasi melalui penyesuaian sistem serta konfigurasi \textit{firmware}, tanpa mempengaruhi keberhasilan utama pengujian pengiriman data.
-
-\vspace{0.3cm}
-
-\noindent\textbf{4.3 Hasil Pengujian \textit{OTA} Firmware \textit{Update}}
-\addcontentsline{toc}{subsection}{4.3 Hasil Pengujian \textit{OTA} Firmware \textit{Update}}
-\vspace{0.1cm} % Spasi tipis
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.9\textwidth sesuai permintaan
-    \includegraphics[width=0.9\textwidth]{otasukses.PNG}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Gambar 4.3} {Hasil Pengujian \textit{OTA} Firmware \textit{Update} }
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\justifying
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.9\textwidth sesuai permintaan
-    \includegraphics[width=0.9\textwidth]{parameterOTA.png}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Gambar 4.3.1} {Tampilan Parameter \textit{OTA} pada \textit{Thingsboard Cloud} }
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-Pengujian \textit{Over-The-Air (OTA)} dilakukan untuk memastikan bahwa sistem mampu melakukan pembaruan firmware secara jarak jauh tanpa perlu proses \textit{flashing} manual melalui kabel USB. Pada tahap ini, \textit{firmware} terbaru diunggah ke server \textit{ThingsBoard Cloud} dan kemudian dikirimkan ke perangkat \textit{ESP32-S3} menggunakan protokol \textit{MQTT} sesuai konfigurasi atribut \textit{OTA} yang telah diatur sebelumnya.
-
-Ketika pembaruan tersedia, perangkat menerima perintah dari server dan secara otomatis menjalankan proses unduh (\textit{download})}, verifikasi \textit{checksum}}, serta instalasi firmware baru ke dalam memori \textit{flash}. Selama proses berlangsung, status pembaruan dapat dipantau melalui \textit{parameter} telemetri \textit{OTA} seperti \textit{fw\_state}, \textit{fw\_version}, \textit{target\_fw\_version}, dan \textit{update\_tag}.
-
-Setelah proses instalasi selesai, perangkat menampilkan pesan ``\textit{OTA update completed, restarting\dots}'' pada terminal Ubuntu yang menandakan bahwa pembaruan berhasil dilakukan. Perangkat kemudian melakukan \textit{reboot} dan memuat firmware versi terbaru secara otomatis.
-
-Hasil pengujian menunjukkan bahwa sistem berhasil memperbarui \textit{firmware} dari versi sebelumnya ke versi terbaru (\textit{fw\_version = PaceS3-v2.0}) dengan status akhir \textit{fw\_state = IDLE}, yang menandakan tidak terdapat kesalahan selama proses pembaruan. Selain itu, proses \textit{OTA} juga berjalan stabil tanpa terjadi gangguan komunikasi antara \textit{ESP32-S3} dan \textit{ThingsBoard Cloud}.
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\noindent\textbf{4.4 Analisis \textit{Latency} dan Visualisasi Data Sensor Menggunakan \textit{Gnuplot} }
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.6\textwidth sesuai permintaan
-    \includegraphics[width=0.6\textwidth]{grafiksensor.jpeg}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Gambar 4.4} {Grafik \textit{Temperature and Humidity} vs \textit{Time }menggunakan \textit{Gnuplot}}
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.6\textwidth sesuai permintaan
-    \includegraphics[width=0.6\textwidth]{grafiklatensi.jpeg}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Gambar 4.4.1} {Grafik \textit{Latency Analysis Sensor RTC} vs \textit{ThingsBoard}}
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\justifying
-Analisis dilakukan untuk memantau performa sistem dalam melakukan transmisi data 
-sensor dan menilai tingkat \textit{latency} jaringan antara perangkat \textit{ESP32-S3} dan server 
-\textit{ThingsBoard Cloud}. Proses visualisasi dan analisis dilakukan menggunakan \textit{Gnuplot}, yang 
-berfungsi untuk menampilkan tren data sensor secara grafis serta menghitung keterlambatan 
-pengiriman data \textit{(network latency)}.
-
-Pada Gambar 4.4, ditampilkan hasil visualisasi data sensor suhu dan kelembapan yang 
-diambil selama periode 2–13 Oktober 2025. Berdasarkan grafik tersebut, terlihat bahwa nilai 
-suhu berada pada rentang 20–36°C, sedangkan kelembapan berada pada rentang 45–70%. 
-Data ditampilkan secara \textit{real-time} melalui \textit{ThingsBoard Cloud}, di mana setiap titik mewakili 
-\textit{payload} JSON yang berisi parameter \textit{temperature, humidity,} dan \textit{timestamp}. 
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-Terlihat adanya jeda data pada tanggal 3 Oktober, yang disebabkan oleh proses 
-pengujian daya eksternal menggunakan adaptor 5V agar sistem dapat melakukan \textit{streaming} 
-24 jam tanpa koneksi laptop langsung. Setelah penyesuaian, pengambilan data kembali stabil 
-hingga tanggal 13 Oktober. 
-
-Selanjutnya, untuk analisis \textit{latency} ditampilkan pada Gambar 4.4.1. Grafik tersebut dihasilkan dari hasil pengolahan data menggunakan perintah \textit{Gnuplot} yang membandingkan perbedaan waktu antara \textit{send\_time} (\textit{timestamp} dari \textit{RTC ESP32-S3}) dan \textit{ts} (\textit{timestamp} dari server \textit{ThingsBoard}). Pengambilan data dilakukan pada \textit{9--12 Oktober 2025}, yaitu saat sistem sudah berhasil menampilkan kedua \textit{parameter} tersebut.   
-
-Hasil pengamatan menunjukkan bahwa nilai \textit{latency} rata-rata berada di kisaran 1,4 
-detik, dengan fluktuasi kecil yang diakibatkan oleh kondisi jaringan \textit{Wi-Fi} lokal. Pola data 
-yang relatif stabil menunjukkan bahwa komunikasi \textit{MQTT} antara perangkat dan server 
-berjalan dengan baik tanpa kehilangan paket \textit{(packet loss)}. Beberapa \textit{spike delay} yang terlihat 
-disebabkan oleh proses \textit{refresh} koneksi \textit{MQTT} ketika server melakukan pembaruan session. 
-
-Secara keseluruhan, hasil ini menunjukkan bahwa sistem stabil, andal, dan responsif 
-dalam melakukan pengiriman data sensor ke cloud, dengan tingkat keterlambatan yang masih 
-dalam batas wajar untuk sistem \textit{IoT} berbasis \textit{Wi-Fi}.
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\begin{center}
-\textbf{BAB V KESIMPULAN DAN SARAN}
-\addcontentsline{toc}{chapter}{BAB V KESIMPULAN DAN SARAN}
-\end{center}
-\vspace{0.3cm}
-
-\noindent\textbf{5.1 Kesimpulan}
-\vspace{0.1cm} % Spasi tipis di bawah judul
-
-\justifying
-% Paragraf pertama MENJOROK
-Berdasarkan hasil perancangan, implementasi, dan pengujian sistem monitoring suhu dan kelembapan menggunakan mikrokontroler \textit{ESP32-S3}, sensor \textit{DHT22}, dan platform \textit{ThingsBoard Cloud} dengan protokol \textit{MQTT}, dapat disimpulkan bahwa sistem yang dibuat telah berhasil berfungsi dengan baik. Perangkat mampu mengirimkan data suhu dan kelembapan secara \textit{real-time} ke \textit{ThingsBoard} dalam format JSON yang berisi suhu, kelembapan, dan \textit{timestamp} dari \textit{RTC} internal \textit{ESP32-S3}. Hasil pengujian menunjukkan proses komunikasi antara perangkat dan server berjalan stabil tanpa kehilangan paket data, serta mampu mempertahankan konektivitas dalam jangka waktu lama selama periode pengujian dari 2 hingga 13 Oktober 2025. Berdasarkan analisis \textit{Gnuplot} terhadap perbandingan antara \textit{send\_time} dan \textit{timestamp} \textit{Thingsboard}, diperoleh rata-rata \textit{network latency} sekitar 1,4 detik, yang menandakan keterlambatan pengiriman data tergolong sangat kecil dan masih dalam batas normal. Selain itu, fitur \textit{OTA} (\textit{Over-The-Air}) \textit{firmware update} juga berhasil diimplementasikan dengan baik, di mana perangkat dapat melakukan pembaruan \textit{firmware} secara otomatis dari \textit{ThingsBoard} tanpa perlu pemrograman manual, dengan status pembaruan yang terpantau melalui parameter \textit{fw\_state} dan \textit{fw\_version}. Secara keseluruhan, sistem ini telah memenuhi tujuan utama \textit{project}, yaitu menghasilkan sistem \textit{IoT} berbasis \textit{cloud} yang efisien, stabil, dan mudah diperbarui dari jarak jauh}.
-\vspace{0.1cm}
-
-\noindent\textbf{5.2 Saran}
-\vspace{0.1cm} % Spasi tipis di bawah judul
-
-\justifying
-% Paragraf pertama MENJOROK
-Untuk pengembangan selanjutnya, sistem ini masih bisa ditingkatkan dari sisi efisiensi daya 
-dan keandalan pengiriman data. Saat ini, perangkat masih bergantung pada adaptor 5V sebagai 
-sumber utama, sehingga jika terjadi pemadaman listrik sistem akan berhenti bekerja. Oleh karena 
-itu, dapat ditambahkan modul baterai serta rangkaian manajemen daya agar perangkat tetap aktif 
-sementara waktu ketika sumber daya utama terputus.
-
-Selain itu, sistem juga dapat dilengkapi dengan mekanisme penyimpanan data lokal 
-sementara \textit{(offline buffer)}. Fungsinya untuk menampung data sensor ketika koneksi \textit{WiFi} 
-terputus, lalu mengirimkannya kembali ke \textit{ThingsBoard Cloud} setelah koneksi pulih. Dengan 
-cara ini, tidak ada data yang hilang dan hasil pemantauan tetap lengkap.
-
-Dari sisi keamanan, komunikasi \textit{MQTT} juga bisa ditingkatkan menggunakan enkripsi TLS/SSL agar proses pertukaran data dan pembaruan \textit{OTA} lebih aman. Terakhir, tampilan \textit{dashboard} di \textit{ThingsBoard} dapat dikembangkan dengan menam-
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\justifying
-% Paragraf pertama MENJOROK
-notifikasi otomatis saat 
-suhu atau kelembapan melebihi batas, serta indikator status \textit{OTA} agar pengguna lebih mudah 
-memantau kondisi perangkat. Dengan pengembangan tersebut, sistem ini berpotensi diterapkan 
-pada skala yang lebih luas seperti \textit{monitoring} lingkungan atau sistem industri kecil yang 
-membutuhkan pemantauan jarak jauh secara \textit{real-time} dan aman.
-
-\newpage
-
-\begin{center}
-    \textbf{DAFTAR PUSTAKA}
-\end{center}
-\vspace{0.5cm}
-
-\setlength{\parindent}{1cm} % Menjorok sedikit di awal paragraf
-\setlength{\parskip}{4pt}   % Jarak antar pustaka
-
-Hercog, D., Lerher, T., Truntič, M., \& Težak, O. (2023). Design and implementation of ESP32-based IoT devices. \textit{Sensors (Basel)}, 23(15), 6739. \url{https://doi.org/10.3390/s23156739}
-
-Aghenta, L. O., \& Iqbal, M. T. (2020). Design and implementation of a low-cost, open source IoT-based SCADA system using ESP32 with OLED, ThingsBoard and MQTT protocol. \textit{AIMS Electronics and Electrical Engineering}, 4(1), 57–74. \url{https://doi.org/10.3934/electreng.2020.1.57}
-
-El Jaouhari, S., \& Bouvet, E. (2022). Secure over-the-air updates for IoT: Survey, challenges, and discussions. \textit{Internet of Things}, 18, 100508. \url{https://doi.org/10.1016/j.iot.2022.100508}
-
-Al-Fuqaha, A., Guizani, M., Mohammadi, M., Aledhari, M., \& Ayyash, M. (2015). Internet of Things: A survey on enabling technologies, protocols, and applications. \textit{IEEE Communications Surveys \& Tutorials}, 17(4), 2347–2376. \url{https://doi.org/10.1109/COMST.2015.2444095}
-
-Integrating Edge Computing and IoT for Real-Time Air and Water Quality Monitoring Systems. (2025). \textit{International Journal of Environmental Sciences}, 11(17s). \url{https://doi.org/10.64252/z52kvj10}
-
-Peng, F. (2024). Environment Monitoring based on the Integration of Edge Computing and Multimodal Sensors. \textit{Applied and Computational Engineering}, 113, 77–82. \url{https://doi.org/10.54254/2755-2721/2024.18307}
-
-Roostaei, J., \& co. (2023). IoT-based edge computing (IoTEC) for improved environmental monitoring. \textit{ScienceDirect}.
-
-Montesclaros, R. M. M., Cruz, J. E. B., Parocha, R. C., \& Macabebe, E. Q. B. (2021). MQTT Based Power Consumption Monitoring with Usage Pattern Visualization Using Uniform Manifold Approximation and Projection for Smart Buildings. \textit{Proceedings of the Intelligent Computing Conference 2021 (Virtual)}. Springer Nature. \url{https://doi.org/10.1007/978-3-030-80126-7_79}
-
-Shvaika, A., Shvaika, D., Landiak, D., et al. (2025). A distributed architecture for MQTT messaging: the case of TBMQ. \textit{Journal of Big Data}, 12, 224. \url{https://doi.org/10.1186/s40537-025-01271-x}
-
-El-Basioni, B. M. M. (2024). A conceptual modeling approach of MQTT for IoT-based systems. \textit{Journal of Electrical Systems and Information Technology}, 11, Article 62. \url{https://doi.org/10.1186/s43067-024-00181-x}
-
-Nitol Saha, Md. Masruk Aulia, Md. Mostafizur Rahman, Mohammed Shafiul Alam Khan. (2024). IoT-Driven Cloud-based Energy and Environment Monitoring System for Manufacturing Industry. \textit{arXiv preprint}.
-
-Ahmad, Y. A., Gunawan, T. S., Mansor, H., Hamida, B. A., Hishamudin, A. F., \& Arifin, F. (2021). On the evaluation of DHT22 temperature sensor for IoT application. \textit{Proceedings of the 2021 8th International Conference on Computer and Communication Engineering (ICCCE 2021)}, 131–134.\url{https://its.id/m/352914267OntheEvaluationofDHT22TemperatureSensor}
-
-Yulizar, D., Soekirno, S., Ananda, N., Prabowo, M. A., Putra Perdana, I. F., \& Aofany, D. (2023). Performance analysis comparison of DHT11, DHT22, and DS18B20 temperature sensors. \textit{Proceedings of the 2023 International Conference on Computing and Applied Electronics}. Atlantis Press. \url{https://www.atlantis-press.com/article/125989928.pdf}
-
-Putri, P., Saragi, M. A., \& Hasibuan, Y. A. E. H. (2024). A prototype IoT temperature and humidity monitoring ESP32-based via ThingSpeak. \textit{INFOKUM: Jurnal Informatika dan Komputer}, 13(1), 15–21. \url{https://infor.seaninstitute.org/index.php/infokum/article/view/2755}
-
-Wardani, I. K., Ichniarsyah, A. N., Telaumbanua, M., Priyonggo, B., Fil’aini, R., Mufidah, Z., \& Dewangga, D. A. (2024). The feasibility study: Accuracy and precision of DHT22 in measuring the temperature and humidity in the greenhouse. \textit{IOP Conference Series: Earth and Environmental Science}, 1290(1), 012032. \url{https://doi.org/10.1088/1755-1315/1290/1/012032}
-
-Amirkhanov, B., Amirkhanova, G., Kunelbayev, M., Adilzhanova, S., \& Tokhtassyn, M. (2025). Evaluating HTTP, MQTT over TCP and MQTT over WebSocket for digital twin applications: A comparative analysis on latency, stability, and integration. \textit{International Journal of Innovative Research and Scientific Studies}, 8(1), 679–694. \url{https://doi.org/10.53894/ijirss.v8i1.4414}
-
-Palmese, F., Redondi, A. E. C., \& Cesana, M. (2022). Adaptive Quality of Service Control for MQTT-SN. \textit{Sensors}, 22(22), 8852. \url{https://doi.org/10.3390/s22228852}
-
-Puthiyidam, J. J., \& Joseph, S. (2024). Internet of things network performance: Impact of message and client sizes and reliability levels. \textit{ECTI Transactions on Electrical Engineering, Electronics, and Communications}, 22(1). \url{https://doi.org/10.37936/ecti-eec.2024221.252941}
-
-Park, C.-Y., Lee, S.-J., \& Lee, I.-G. (2025). Secure and lightweight Over-the-Air update mechanism for Internet of Things. \textit{Electronics}, 14(8), 1583. \url{https://doi.org/10.3390/electronics14081583}
-
-Malumbres, V., Saldana, J., Berné, G., \& Modrego, J. (2024). Updates over the air via LoRa: Unicast and broadcast combination for boosting update speed. \textit{Sensors}, 24(7), 2104. \url{https://doi.org/10.3390/s24072104}
-
-Wei, W., Banerjee, J., Islam, S., Pan, C., \& Xie, M. (2023). Energy-aware Incremental OTA Update for Flash-based Batteryless IoT Devices. \textit{arXiv preprint arXiv:2406.12189}. \url{https://arxiv.org/abs/2406.12189}
-
-Atzori, L., Iera, A., \& Morabito, G. (2016). Understanding the Internet of Things: Definition, potentials, and societal role of a fast evolving paradigm. \textit{Ad Hoc Networks}, 56, 122–140. \url{https://doi.org/10.1016/j.adhoc.2016.12.004}
-
-Ray, P. P. (2016). A survey on Internet of Things architectures. \textit{Journal of King Saud University – Computer and Information Sciences}, 30(3), 291–319. \url{https://doi.org/10.1016/j.jksuci.2016.10.003}
-
-Espressif Systems. (2022). ESP32-S3 Series Datasheet. \textit{Espressif Systems}. \url{https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf}
-
-Nemlaha, E., Strelec, P., Horák, T., Kováč, S., \& Tanuška, P. (2023). Suitability of MQTT and REST Communication Protocols for AIoT or IIoT Devices Based on ESP32-S3. \textit{ResearchGate}. \url{https://www.researchgate.net/publication/366776204}
-
-Wang, T., Wang, L., \& Yan, P. (2022). Application of embedded Linux in the design of Internet of Things gateway. \textit{Journal of Intelligent Systems}, 31(1), 1014–1023. \url{https://doi.org/10.1515/jisys-2021-0208}
-
-Chaudhary, H., Anthony, A., Abiona, O., \& Onime, C. (2025). Unix-Based Systems in Embedded and IoT Devices: Exploring the Versatility and Robustness. \textit{International Journal of Communications, Network and System Sciences}, 18, 15–25. \url{https://doi.org/10.4236/ijcns.2025.182002}
-
-Farina, M. D. O., Pohren, D. H., Roque, A. dos S., Silva, A., da Costa, J. P. J., Fontoura, L. M., … \& Freitas, E. P. de. (2024). Hardware-Independent Embedded Architecture Framework. \textit{Journal of Internet Services and Applications}, 15(1), 14–24. \url{https://doi.org/10.5753/jisa.2024.3634}
-
-Amanlou, S. (2020). Lightweight security mechanism over MQTT protocol for IoT devices. \textit{International Journal of Advanced Computer Science and Applications}, 11(7). \url{https://doi.org/10.14569/IJACSA.2020.0110726}
-
-Seoane, V., García-Rubio, C., Almenares, F., \& Campo, C. (2021). Performance evaluation of CoAP and MQTT with security support for IoT environments. \textit{Computer Networks}. \url{https://doi.org/10.1016/j.comnet.2021.108338}
-
-Panagou, I. C., Katsoulis, S., Nannos, E., Zantalis, F., \& Koulouras, G. (2025). A Comprehensive Evaluation of IoT Cloud Platforms: A Feature-Driven Review with a Decision-Making Tool. \textit{Sensors}, 25(16), 5124. \url{https://doi.org/10.3390/s25165124}
-
-Shvaika, D. I., Shvaika, A. I., \& Artemchuk, V. O. (2024). Advancing IoT interoperability: Dynamic data serialization using ThingsBoard. \textit{Journal of Edge Computing}, 3(2), 126–135. \url{https://doi.org/10.55056/jec.74}
-
-Plauska, I., Liutkevičius, A., \& Janavičiūtė, A. (2023). Performance Evaluation of C/C++, MicroPython, Rust and TinyGo Programming Languages on ESP32 Microcontroller. \textit{Electronics}, 12(1), 143. \url{https://doi.org/10.3390/electronics12010143}
-
-Culic, I., Vochescu, A., \& Radovici, A. (2022). A Low-Latency Optimization of a Rust-Based Secure Operating System for Embedded Devices. \textit{Sensors}, 22(22), 8700. \url{https://doi.org/10.3390/s22228700}
-
-Sharma, A., Sharma, S., Torres-Arias, S., \& Machiry, A. (2023). Rust for Embedded Systems: Current State, Challenges and Open Problems (Extended Report). \textit{arXiv}. \url{https://arxiv.org/abs/2311.05063}
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\begin{center}
-\textbf{LAMPIRAN}
-\end{center}
-\vspace{0.3cm}
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.3\textwidth sesuai permintaan
-    \includegraphics[width=0.3\textwidth]{esp.jpeg}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Lampiran 1.} {\textit{ESPS3-32} terhubung dengan adaptor dan sensor \textit {DHT22}}
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.8\textwidth sesuai permintaan
-    \includegraphics[width=0.8\textwidth]{konek.jpeg}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Lampiran 2.} {Tampilan konektivitas di terminal \textit {Ubuntu}}
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-     \centering
-    % Menggunakan width 0.8\textwidth sesuai permintaan
-    \includegraphics[width=0.8\textwidth]{pengujiandata.png}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Lampiran 3.} {\textit{Dashboard ThingsBoard Cloud} menampilkan grafik suhu dan kelembapan}
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.9\textwidth sesuai permintaan
-    \includegraphics[width=0.9\textwidth]{otasukses.PNG}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Lampiran 4.} {Hasil Pengujian \textit{OTA} Firmware \textit{Update} }
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-    \centering
-    % Menggunakan width 0.9\textwidth sesuai permintaan
-    \includegraphics[width=0.9\textwidth]{parameterOTA.png}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Lampiran 5.} {Tampilan Parameter \textit{OTA} pada \textit{Thingsboard Cloud} }
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\newpage
-\thispagestyle{plain}
-
-% --- Mulai pengaturan spasi 1.5 ---
-\onehalfspacing 
-% --- Akhir pengaturan spasi 1.5 ---
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-     \centering
-    % Menggunakan width 0.8\textwidth sesuai permintaan
-    \includegraphics[width=0.8\textwidth]{grafiksensor.jpeg}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Lampiran 6.} {Grafik \textit{Temperature and Humidity} vs \textit{Time }menggunakan \textit{Gnuplot}}
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
-
-\begin{figure}[h!]
-    \vfill % Spasi vertikal di atas gambar
-    
-     \centering
-    % Menggunakan width 0.8\textwidth sesuai permintaan
-    \includegraphics[width=0.8\textwidth]{grafiklatensi.jpeg}
-
-    % MENGHILANGKAN KATA "Gambar" 
-    \renewcommand{\figurename} % Menghilangkan kata "Gambar" yang muncul otomatis
-    \caption{\textbf{Lampiran 7.} {Grafik \textit{Latency Analysis Sensor RTC} vs \textit{ThingsBoard}}
-    
-    \renewcommand{\figurename}{Gambar} % Mengembalikan kata "Gambar" ke default untuk gambar selanjutnya
-    
-    \vfill % Spasi vertikal di bawah gambar
-\end{figure}
 
 \vspace{0.9cm}
-\noindent\textbf{Link Drive Kelompok 15:}  
+\noindent\textbf{Link Drive Kelompok 15:}
 \href{}{https://its.id/m/Kelompok15IoT}
+(link drive tersebut berisi file pdf Kumpulan Referensi Jurnal, Skrip Latex, Link Github, Laporan, Paper Ilmiah, beserta file csv yakni sensor data dan latency).
 
 \newpage
 \begin{center}

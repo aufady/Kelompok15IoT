@@ -231,7 +231,7 @@ Sistem ESP32-S3 + DHT22 berbasis Rust Embedded mampu:
 ![Gambar 4](perintahlatensi.jpeg)  
 *Perintah Gnuplot untuk Grafik Latensi*
 
-![Gambar 5](DokumentasiESP32-S3peg)  
+![Gambar 5](DokumentasiESP32-S3.png)  
 *ESP32-S3 terhubung dengan adaptor dan sensor DHT2*
 
 ![Gambar 6](TampilanKonektivitas.jpeg)  
@@ -246,8 +246,8 @@ Sistem ESP32-S3 + DHT22 berbasis Rust Embedded mampu:
 ![Gambar 9](parameterOTA.png)  
 *Tampilan parameter OTA pada ThingsBoard Cloud *
 
-![Gambar 10](GrafiksensorGnuplot.jpeg)  
+![Gambar 10](DataGrafikSensorAufa.jpg)  
 *Grafik Temperature and Humidity vs Time menggunakan Gnuplot *
 
-![Gambar 11](GrafikLatensiGnuplot.jpeg)  
+![Gambar 11](LatencyAufa.jpg)  
 *Grafik Latency Analysis Sensor RTC vs ThingsBoard *
